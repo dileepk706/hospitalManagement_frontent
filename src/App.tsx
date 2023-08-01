@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import PatientRouter from './routes/patient/patientRoutes';
+import DoctorRouter from './routes/doctor/Doctorouter';
+import AdminRouter from './routes/admin/AdminRouter';
+// import dotenv  from "dotenv";
+// dotenv.config()
 
-function App() {
+interface applicationType  {}
+
+const App:React.FC<applicationType>=()=> {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+    
+      <PatientRouter />
+      <DoctorRouter />
+      <AdminRouter />
+    </>
+  ); 
 }
-
 export default App;
+
+// <BrowserRouter>
+//       <Routes>
+//         <Route path='/' element={<PatientProtected><UserHome /></PatientProtected>} />
+//         <Route path='/doctor' element={<DoctorProtected><DoctorHomePage/></DoctorProtected>}/>
+//         <Route path='/admin' element={<AdminProtected><AdminHomePage /></AdminProtected>} />
+//       </Routes>
+//     </BrowserRouter>
