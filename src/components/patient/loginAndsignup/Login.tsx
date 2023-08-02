@@ -1,78 +1,96 @@
-import React, { useState, useEffect } from 'react';
-import { googleLogout, useGoogleLogin } from '@react-oauth/google';
-import axios from 'axios';
-import { loginWithGoogle as LoginWithGoogle } from '../../../services/patients/patientLogin';
+import React, {  } from 'react';
+import { loginSchema } from '../../../schema/patient';
+import { useFormik } from 'formik';
+import doctersImg from '../../../assets/images/team-medical-professionals-white-background-team-medical-professionals-white-background-178237078.webp'
+import LoginWithSocialMediaWrapper from './LoginWthSocialMdia';
+import SignupAndLoginButton from './SignupButton';
 
 interface LoginProps {
-  setIsLogin: any;
+  setIsLoginComponent: Function;
 }
 
-const Login = ({ setIsLogin }: LoginProps) => {
+interface initialValuesType {
+  email: string;
+  password: string;
+}
+const initialValues: initialValuesType = {
+  email: '',
+  password: ''
+}
+
+
+const Login:React.FC<LoginProps> = ({setIsLoginComponent} ) => {
  
-  const [ googleUser, setGoogleUser ] = useState<{access_token: string}>();
-  const [ googleProfile, setGoogleProfile ] = useState<{
-    name: string;
-    email: string;
-    picture: string;
-  } | null>();
 
-  const loginWithGoole = useGoogleLogin({
-    onSuccess: (codeResponse) => setGoogleUser(codeResponse),
-    onError: (error) => console.log('Login Failed:', error)
-  });
-  useEffect(() => {
-    const fetchGoogleProfile = async () => {
-      if (googleUser) {
-        try {
-          const res = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
-            headers: {
-              Authorization: `Bearer ${googleUser?.access_token}`,
-              Accept: 'application/json',
-            },
-          });
-          setGoogleProfile(res.data);
-          const user = await LoginWithGoogle(res?.data?.email, res?.data?.name, res?.data?.picture);
-          console.log(user);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
-  
-    fetchGoogleProfile();
-  }, [googleUser]);
-  
-  // log out function to log the user out of google and set the profile array to null
-  const logOut = () => {
-    googleLogout();
-    setGoogleProfile(null);
-    setIsLogin(false);
-  };
+  const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
+    initialValues: initialValues,
+    validationSchema: loginSchema,
+    onSubmit: (values) => {
+    }
+  })
 
+
+   
   return (
-    <div>
-      <h2>React Google Login</h2>
-      <br />
-      <br />
-      {googleProfile ? (
-        <div>
-            <img src={googleProfile.picture} alt="" />
-          <h3>User Logged in</h3>
-          <p>Name: {googleProfile.name}</p>
-          <p>Email Address: {googleProfile.email}</p>
-          <br />
-          <br />
-          <button onClick={logOut}>Log out</button>
-        </div>
-      ) : (
-        <>
-        <button onClick={() => loginWithGoole()}>Sign in with Google 🚀 </button>
-        <button onClick={() => setIsLogin(false)}>signup</button>
-        </>
-        
 
-      )}
+
+    <section className="h-screen">
+    <div className="h-full">
+      {/* Left column container with background */}
+      <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
+      <div className="shrink-1 mb-12  grow-0 basis-auto md:mb-0 md:w-9/12 md:shrink-0 lg:w-6/12 xl:w-6/12 md:overflow-hidden">
+              <img src={doctersImg} className="w-full max-w-[170%] md:w-[163%]" alt="" />
+            </div>
+  
+        {/* Right column container */}
+        <div className="mb-12 md:mb-0 md:w-8/12 md:px-[70px] lg:w-5/12 xl:w-5/12">
+          <form onSubmit={handleSubmit}>
+            {/* login with socialmedia */}
+          <LoginWithSocialMediaWrapper/>
+  
+            <div className="relative mb-6" data-te-input-wrapper-init>
+                  <label className="block   text-sm font-medium text-gray-900 dark:text-white">Email address</label>
+                  <input
+                    type="name"
+                    autoComplete='off'
+                    name='email'
+                    id='email'
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder='Email address' className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  ' />
+                  {errors.email && touched.email && <p className='text-red-600 text-sm '>{errors.email}</p>}
+                </div>
+
+
+                <div className="relative mb-6" data-te-input-wrapper-init>
+                  <label className="block   text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                  <input
+                    type="password"
+                    autoComplete='off'
+                    name="password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder='password' className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  ' />
+                  {errors.password && touched.password && <p className='text-red-600 text-sm '>{errors.password}</p>}
+                </div> 
+
+   
+  
+            <div className="mb-6 flex items-center justify-between">
+              {/* Forgot password link */}
+              <a href="#!">Forgot password?</a>
+            </div>
+  
+            {/* Login button */}
+            <SignupAndLoginButton   setIsLoginComponent={setIsLoginComponent} status={false} buttonName='Login'/>
+
+          </form>
+        </div>
+      </div>
     </div>
+  </section>
   );
 };
 

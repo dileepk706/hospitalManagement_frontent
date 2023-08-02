@@ -2,7 +2,6 @@ import { api } from "../../api/axios";
 
 export const loginWithGoogle=async(email:string,name:string,picture:string):Promise<any>=>{
     try {
-    // let c='sort=consultingFee-1'
         const res = await api.post(`login-googleAuth`,{
             email,name,picture
         })
@@ -12,4 +11,13 @@ export const loginWithGoogle=async(email:string,name:string,picture:string):Prom
         console.log('error : ',error.message);
         return []
     }
+}
+
+export const userSignup = async (email: string, name: string, password: string): Promise<void> => {
+    const res = await api.post('signup', {
+        email, name, password
+    })
+    const data = await res.data
+    return data
+
 }

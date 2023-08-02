@@ -5,10 +5,11 @@ import Signup from "../../components/patient/loginAndsignup/Signup"
 const LoginPage=()=>{
 
     const [isLoginComponent,setIsLoginComponent]=useState(true)
-
+    console.log(isLoginComponent);
+    
     return(
         <>
-        {isLoginComponent?<Login setIsLogin={setIsLoginComponent}/>:<Signup setIsLogin={setIsLoginComponent}/>}
+        {isLoginComponent?<Login setIsLoginComponent={setIsLoginComponent}/>:<Signup setIsLoginComponent={setIsLoginComponent}/>}
          
         
         </>
