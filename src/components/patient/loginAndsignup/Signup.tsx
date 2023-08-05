@@ -1,13 +1,13 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useFormik } from 'formik'
-import { findRenderedDOMComponentWithTag } from 'react-dom/test-utils';
 import { signupSchema } from '../../../schema/patient';
-
 import doctersImg from '../../../assets/images/team-medical-professionals-white-background-team-medical-professionals-white-background-178237078.webp'
-
-import LoginButton from './LoginButton';
 import LoginWithSocialMediaWrapper from './LoginWthSocialMdia';
 import SignupAndLoginButton from './SignupButton';
+import { userSignup } from '../../../services/patients/patientLogin';
+import { useAppDispatch } from '../../../redux/hooks';
+import { updateUserCredentials } from '../../../redux/patient/patientSlice';
+import { useNavigate } from 'react-router-dom';
 
 type SignupProps = {
   setIsLoginComponent: Function
@@ -28,22 +28,37 @@ const initialValues: initialValuesType = {
 
 const Signup: React.FC<SignupProps> = ({ setIsLoginComponent }) => {
 
+  const dispatch=useAppDispatch()
+  const navigate=useNavigate()
+  const [apiError,setApiError]=useState<string>('')
+  const [loading,setLoading]=useState<boolean>(false)
+
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } = useFormik({
     initialValues: initialValues,
     validationSchema: signupSchema,
     onSubmit: (values, action) => {
-      console.log('the onsubt sfjhs dsfgjh', values.confirmPassword)
-      
-      action.resetForm()
-      try {
+      setLoading(true)
+      setApiError('')
+      const loginUser=async()=>{
+        try {
+          const User=await userSignup(values.email,values.name,values.password)
+          if(User){
+              const {accessToken,user}=User
+              dispatch(updateUserCredentials({accessToken:accessToken,userImage:user?.image?user.image:'',userName:user?.name}))
+              navigate('/')
+          }
+          action.resetForm()
+          setLoading(false)
+        } catch (error: any) {
+          error?.response?.data?.message && setApiError(error?.response?.data?.message)
+          setLoading(false)
+        }
+      } 
+      loginUser()
 
-      } catch (error: any) {
-        console.log(error.message);
-
-      }
     }
   })
-
+ 
 
   return (
     <section className="h-screen">
@@ -91,6 +106,7 @@ const Signup: React.FC<SignupProps> = ({ setIsLoginComponent }) => {
 
                 {errors.email && touched.email && <p className='text-red-600 text-sm '>{errors.email}</p>}
 
+                {apiError && apiError && <p className='text-red-600 text-sm '>{apiError}</p>}
 
               </div>
 
@@ -124,7 +140,13 @@ const Signup: React.FC<SignupProps> = ({ setIsLoginComponent }) => {
               </div>
 
               {/* Login button */}
-              <SignupAndLoginButton setIsLoginComponent={setIsLoginComponent} status={true} buttonName='Signup'/>
+      
+              <SignupAndLoginButton 
+              setIsLoginComponent={setIsLoginComponent} 
+              status={true} 
+              setLoading={setLoading}  
+              loading={loading}
+              buttonName='Signup'/>
               
               
             </form>

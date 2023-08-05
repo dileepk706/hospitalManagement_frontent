@@ -1,21 +1,26 @@
-import React,{useState} from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import DoctorHome from '../../pages/doctor/DoctorHomePage';
 import DoctorProtected from './DoctorProtected';
-import SidebarDoctor from '../../components/doctor/sideBar/Sidebar';
-
+import LoginPage from '../../pages/doctor/LoginPage';
+import { useAppSelector } from '../../redux/hooks';
+import Drawer from "../../components/doctor/sideBar/Sidebar";
+import AddSchedulePage from '../../pages/doctor/AddSchedule';
 interface applicationType  {}
                           
 const DoctorRouter:React.FC<applicationType>=()=> {
-  const [isDoctor,setIsDoctor] =useState(false)
+  const doctorToken= useAppSelector(state=>state?.doctor?.accessToken)
+  
 
   return (
-    <BrowserRouter>
-    {isDoctor&&<SidebarDoctor/>}
+    <>
+      <Drawer />
       <Routes>
-        <Route path='/doctor' element={<DoctorProtected><DoctorHome /></DoctorProtected>} />
+        <Route path='/login' element={!doctorToken && <LoginPage />} />
+        <Route path='/' element={<DoctorProtected><DoctorHome /></DoctorProtected>} />
+        <Route path='/add-schedule' element={<DoctorProtected><AddSchedulePage /></DoctorProtected>} />
       </Routes>
-    </BrowserRouter>
-  ); 
+    </>
+  );
 }
 export default DoctorRouter;

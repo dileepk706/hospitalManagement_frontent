@@ -8,11 +8,9 @@ interface applicationType  {}
 const AdminRouter:React.FC<applicationType>=()=> {
 
   return (
-    <BrowserRouter>
       <Routes>
-        <Route path='/admin' element={<AdminProtected><AdminHome /></AdminProtected>} />
+        <Route path='/' element={<AdminProtected><AdminHome /></AdminProtected>} />
       </Routes>
-    </BrowserRouter>
   ); 
 }
 export default AdminRouter;

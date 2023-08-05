@@ -1,13 +1,19 @@
 import { Chat,Home, Menu ,BookOnline,Person,ListAlt,MonitorHeart,Medication} from '@mui/icons-material';
-import {   Box, Button, Drawer,  List, ListItem, ListItemButton, ListItemIcon, ListItemText,styled } from '@mui/material';
+import {   Avatar, Box, Button, Drawer,  List, ListItem, ListItemButton, ListItemIcon, ListItemText,styled } from '@mui/material';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SearchBarAutocomplete from '../searchInputBar/SearchBar';
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
+import { logoutPateint } from '../../../redux/patient/patientSlice';
 
  
 interface SidebarProps {}
 
 const Sidebar: React.FC<SidebarProps> = () => {
+
+   const patient=useAppSelector(state=>state.user)
+   const dispatch=useAppDispatch()
+   const navigate=useNavigate()
 
    //types
    type optionType={
@@ -87,7 +93,15 @@ const Sidebar: React.FC<SidebarProps> = () => {
                <Button onClick={toggleDrawer('left', true)}><Menu /></Button>
                <SearchBarAutocomplete />
             </Box>
-            <Button variant="outlined"><Link to={'/login'}>Login</Link></Button>
+
+            {patient?.accessToken ?
+               (<Avatar onClick={()=>{
+                  dispatch(logoutPateint({}))
+                  localStorage.removeItem('user')
+                  navigate('/login')
+               }} alt="Remy Sharp" src={patient?.userImage && `${patient?.userImage}`} />) :
+               (<Button variant="outlined"><Link to={'/login'}>Login</Link></Button>)
+            }
          </StyledBox>
          <Drawer
             open={state['left']}

@@ -14,7 +14,7 @@ export const fetchAllDoctorDepatmentHealthNames=async():Promise<any>=>{
         const {data} = await api.get(`/get-alldoctor-alldepartment-allhealth`)
         return data
     } catch (error:any) {
-        console.log('error : ',error.message);
+        console.log('error : ',error);
         return []
     }
 }

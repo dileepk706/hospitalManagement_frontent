@@ -6,6 +6,7 @@ interface AdminProtectedProps {
 }
 
 const AdminProtected: React.FC<AdminProtectedProps> = ({ children }) => {
+  
   const token = true; // TypeScript will infer the type based on the assigned value
 
   if (token) { // You can use the boolean value directly for the condition

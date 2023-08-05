@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { loginSchema } from '../../../schema/patient';
 import { useFormik } from 'formik';
 import doctersImg from '../../../assets/images/team-medical-professionals-white-background-team-medical-professionals-white-background-178237078.webp'
-import LoginWithSocialMediaWrapper from './LoginWthSocialMdia';
-import SignupAndLoginButton from './SignupButton';
 import { userLogin } from '../../../services/patients/patientLogin';
 import { useAppDispatch } from '../../../redux/hooks';
 import { updateUserCredentials } from '../../../redux/patient/patientSlice';
 import { useNavigate } from 'react-router-dom';
+import SignupButton from './SignupButton'
+import { DoctorLogin } from '../../../services/doctor/doctorLogin';
+import { updateDoctorCredentials } from '../../../redux/doctor/doctorSlice';
 
 interface LoginProps {
-  setIsLoginComponent: Function;
 }
 
 interface initialValuesType {
@@ -23,7 +23,7 @@ const initialValues: initialValuesType = {
 }
 
 
-const Login:React.FC<LoginProps> = ({setIsLoginComponent} ) => {
+const Login:React.FC<LoginProps> = () => {
  
   const dispatch=useAppDispatch()
   const navigate=useNavigate()
@@ -38,17 +38,17 @@ const Login:React.FC<LoginProps> = ({setIsLoginComponent} ) => {
       setLoading(true)
       const userLoginHelper=async()=>{
         try {
-          const User = await userLogin(values.email, values.password)
-          if(User){
-            const {accessToken,user}=User
+          const Doctor = await DoctorLogin(values.email, values.password)
+          if(Doctor){
+            const {accessToken,user: doctor}=Doctor
             console.log('accessToken',accessToken);
             
-            dispatch(updateUserCredentials({accessToken:accessToken,userImage:user?.image?user.image:'',userName:user?.name}))
-            navigate('/')
+            dispatch(updateDoctorCredentials({accessToken:accessToken,doctorImage:doctor?.image?doctor.image:'',doctorName:doctor?.name}))
+            navigate('/doctor')
         }
         } catch (error:any) {
           error?.response?.data?.message && setApiError(error?.response?.data?.message)
-          console.log(error?.response);
+          console.log(error?.response?.data?.message);
           setLoading(false)
         }
       }
@@ -62,9 +62,6 @@ const Login:React.FC<LoginProps> = ({setIsLoginComponent} ) => {
 
 
     <section className="h-screen">
-
-    
-   
     
     <div className="h-full">
       {/* Left column container with background */}
@@ -75,9 +72,10 @@ const Login:React.FC<LoginProps> = ({setIsLoginComponent} ) => {
   
         {/* Right column container */}
         <div className="mb-12 md:mb-0 md:w-8/12 md:px-[70px] lg:w-5/12 xl:w-5/12">
+        <p className="mb-3 mr-4 text-lg    ">Login as Doctor</p>
+
           <form onSubmit={handleSubmit}>
             {/* login with socialmedia */}
-          <LoginWithSocialMediaWrapper/>
   
             <div className="relative mb-6" data-te-input-wrapper-init>
                   <label className="block   text-sm font-medium text-gray-900 dark:text-white">Email address</label>
@@ -92,7 +90,7 @@ const Login:React.FC<LoginProps> = ({setIsLoginComponent} ) => {
                     onBlur={handleBlur}
                     placeholder='Email address' className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  ' />
                   {errors.email && touched.email && <p className='text-red-600 text-sm '>{errors.email}</p>}
-                  {apiError==='User is not exist' &&   <p className='text-red-600 text-sm '>{apiError}</p>}
+                  {apiError==='Doctor is not exist' &&   <p className='text-red-600 text-sm '>{apiError}</p>}
                
                 </div>
 
@@ -109,7 +107,7 @@ const Login:React.FC<LoginProps> = ({setIsLoginComponent} ) => {
                     onBlur={handleBlur}
                     placeholder='password' className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  ' />
                   {errors.password && touched.password && <p className='text-red-600 text-sm '>{errors.password}</p>}
-                  {apiError==='Incorrect password' &&   <p className='text-red-600 text-sm '>{apiError}</p>}
+                  {apiError==='Incorrect Password' &&   <p className='text-red-600 text-sm '>{apiError}</p>}
                 </div> 
 
    
@@ -120,13 +118,7 @@ const Login:React.FC<LoginProps> = ({setIsLoginComponent} ) => {
             </div>
   
             {/* Login button */}
-              <SignupAndLoginButton
-                setIsLoginComponent={setIsLoginComponent}
-                status={false}
-                buttonName='Login'
-                setLoading={setLoading}
-                loading={loading}
-              />
+              <SignupButton />
              
           </form>
         </div>

@@ -1,10 +1,11 @@
 import LoadingSvgForButtons from '../../LodingSpinnerSvg';
 import React from 'react'
+import DoctorLoginRouterLink from '../../doctor/login/LoginRouterLink';
 
 type LoginButtonProps={
-    setIsLogin:Function
 }
-const LoginButton:React.FC<LoginButtonProps>=({setIsLogin})=>{
+
+const SignupButton:React.FC<LoginButtonProps>=()=>{
 
     return(
         <div className="text-center lg:text-left">
@@ -14,22 +15,10 @@ const LoginButton:React.FC<LoginButtonProps>=({setIsLogin})=>{
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >
-                  <LoadingSvgForButtons />
-
+                  {true?<LoadingSvgForButtons />:'login'}
                 </button>
-
-                {/* Register link */}
-                <p className="mb-0 mt-2 pt-1 text-sm font-semibold">
-                  Do you have an account?
-                  <button
-                    onClick={() => setIsLogin(true)}
-                    className="text-danger transition duration-150 ease-in-out  cursor-pointer"
-                  >
-                    Login
-                  </button>
-                </p>
               </div>
     )
 }
 
-export default LoginButton
+export default SignupButton
