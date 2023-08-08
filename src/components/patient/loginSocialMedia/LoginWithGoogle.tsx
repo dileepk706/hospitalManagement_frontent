@@ -39,7 +39,7 @@ const LoginWithGoogle=()=>{
           if(User){
             const {accessToken,user}=User
             console.log('accessToken',accessToken);
-            
+               
             dispatch(updateUserCredentials({accessToken:accessToken,userImage:user?.image?user.image:'',userName:user?.name}))
             navigate('/')
           console.log(user)

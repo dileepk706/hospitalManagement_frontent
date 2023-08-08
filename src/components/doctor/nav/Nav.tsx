@@ -10,7 +10,7 @@ const Nav: React.FC<NavProps> = ({toggleDrawer}) => {
     const doctor = useAppSelector(state => state.doctor)
 
     return (
-        <div className='w-full z-10 p-2   sticky top-0 rounded-md flex justify-between shadow-sm shadow-slate-300'>
+        <div className='w-full z-10 p-2 bg-white  sticky top-0 rounded-md flex justify-between shadow-sm shadow-slate-300'>
             
             <button
                 className="text-black bg-slate-100 hover:bg-slate-200 focus:ring-4 focus:ring-blue-300 font-medium rounded-sm text-sm px-3 py-1.5 mr-2 dark:bg-white dark:hover:bg-white focus:outline-none "

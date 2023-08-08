@@ -41,7 +41,6 @@ const Login:React.FC<LoginProps> = () => {
           const Doctor = await DoctorLogin(values.email, values.password)
           if(Doctor){
             const {accessToken,user: doctor}=Doctor
-            console.log('accessToken',accessToken);
             
             dispatch(updateDoctorCredentials({accessToken:accessToken,doctorImage:doctor?.image?doctor.image:'',doctorName:doctor?.name}))
             navigate('/doctor')
