@@ -75,6 +75,7 @@ const DoctorsListAria = () => {
                             rating={doc.rating}
                             review={doc.review}
                             image={doc.image}
+                            id={doc._id}
                             key={i} />
                     ))}
                 </div>

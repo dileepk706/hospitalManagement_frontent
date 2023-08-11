@@ -7,6 +7,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import {TimePicker } from '@mui/x-date-pickers';
 import { CreateSlote } from '../../../services/doctor/slots';
+import { checkDocterAuth } from '../../../utils/chekAuth';
 type AddScheduleProps = {}
 
 const AddSchedule: React.FC<AddScheduleProps> = () => {
@@ -33,10 +34,7 @@ const AddSchedule: React.FC<AddScheduleProps> = () => {
             console.log(createdSlote);
             
         } catch (error:any) {
-            if (error?.response?.status === 401 || error?.response?.status === 403) {
-                localStorage.removeItem('persist:doctor')
-                window.location.href = '/login';
-              }
+            checkDocterAuth(error)
             setApiError(error?.response?.data?.message)
             console.log('error : ',error?.response?.status );
         }

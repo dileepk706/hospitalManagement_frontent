@@ -25,7 +25,6 @@ const SearchBarAutocomplete: React.FC = () => {
   useEffect(() => {
     const getAllDoctorDepatmentHealthNames = async () => {
       const data = await fetchAllDoctorDepatmentHealthNames()
-      console.log(data);
       
       setDoctor_department_health_names(data)
     }

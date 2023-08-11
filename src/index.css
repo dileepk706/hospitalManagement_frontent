@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:wght@300&family=PT+Sans&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,4 +17,23 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+.fontstyles {
+  font-family: 'Exo', sans-serif;
+font-family: 'Palanquin Dark', sans-serif;
+font-family: 'PT Sans', sans-serif;
+font-family: 'REM', sans-serif;
+}
+
+
+.custom-text {
+  font-size: 0.875rem; /* Equivalent to text-sm */
+  color: #4A5568; /* Use your desired gray color code */
+  font-weight: 100; /* Equivalent to font-thin */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin-top: 1px;
+  margin-left: 10%;
 }

@@ -1,8 +1,10 @@
 import { Send } from "@mui/icons-material"
 import { Button, Chip, Rating } from "@mui/material"
 import React from 'react'
+import { Link } from "react-router-dom"
 
 type DoctorCardProps={
+    id:string
     DoctorName:string
     department:string
     image?:string
@@ -12,7 +14,7 @@ type DoctorCardProps={
     rating:number
 }
 
-const DoctorCard:React.FC<DoctorCardProps> = ({DoctorName,department,image,experience,cunsultingFee,review,rating}) => {
+const DoctorCard:React.FC<DoctorCardProps> = ({DoctorName,department,image,experience,cunsultingFee,review,rating,id}) => {
     const defualtImage="https://img.freepik.com/premium-vector/avatar-female-doctor-with-black-hair-doctor-with-stethoscope-vector-illustrationxa_276184-33.jpg?w=2000"
 
     const reviewCount=review?.length;
@@ -38,7 +40,9 @@ const DoctorCard:React.FC<DoctorCardProps> = ({DoctorName,department,image,exper
                     <Button variant="contained" endIcon={<Send />} size="small" color="success">
                         Message
                     </Button>
-                    <Button variant="contained" size="small" color="primary">Make an appointment</Button>
+                    <Button variant="contained" size="small" color="primary">
+                        <Link to={`/make-appointment/${id}`}>Make an appointment</Link>
+                    </Button>
 
                 </div>
             </div>

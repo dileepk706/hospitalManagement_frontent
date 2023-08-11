@@ -1,11 +1,12 @@
-import React,{useState} from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import {  Route, Routes } from 'react-router-dom';
 import PatientHome from '../../pages/patient/PatientHomePage';
 import PatientProtected from './PatientProtected';
 import ListDoctor from '../../pages/patient/ListDoctors';
 import LoginPage from '../../pages/patient/LoginPage';
 import { useAppSelector } from '../../redux/hooks';
-import Sidebar from '../../components/patient/sideBar/SideBar'
+import BookDoctorSlot from '../../pages/patient/BookingPage';
+
 
 interface applicationType  {}
  
@@ -15,11 +16,11 @@ const PatientRouter:React.FC<applicationType>=()=> {
   
   return (
     <>
-    <Sidebar />
      <Routes>
-        <Route path='/' element={<PatientProtected><PatientHome /></PatientProtected>} />
-        <Route path='/doctors' element={<PatientProtected><ListDoctor /></PatientProtected>} />
-        <Route path='/login' element={ !userToken && <LoginPage />  } /> 
+        <Route path='/login' element={!userToken && <LoginPage />} />
+        <Route path='/' element={ <PatientHome />} />
+        <Route path='/doctors' element={<ListDoctor />} />
+        <Route path='/make-appointment/:id' element={ <BookDoctorSlot /> } /> 
       </Routes>
   </>
   ); 
