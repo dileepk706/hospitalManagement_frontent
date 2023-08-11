@@ -38,11 +38,9 @@ const LoginWithGoogle=()=>{
           const User = await loginWithGoogle(res?.data?.email, res?.data?.name, res?.data?.picture);
           if(User){
             const {accessToken,user}=User
-            console.log('accessToken',accessToken);
                
             dispatch(updateUserCredentials({accessToken:accessToken,userImage:user?.image?user.image:'',userName:user?.name}))
             navigate('/')
-          console.log(user)
           }
         } catch (error:any){
           console.log(error?.response);
