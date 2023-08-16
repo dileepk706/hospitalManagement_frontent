@@ -28,8 +28,8 @@ const Sidebar: React.FC<SidebarProps> = () => {
       { sideBarItem: 'Home', isSelected: true,route:'/' },
       { sideBarItem: 'Profile', isSelected: false,route:'/profile'  },
       { sideBarItem: 'Take an appointment', isSelected: false,route:'/book-slot'  },
-      { sideBarItem: 'Appointments', isSelected: false ,route:'/' },
-      { sideBarItem: 'Reports', isSelected: false,route:'/'  },
+      { sideBarItem: 'Appointments', isSelected: false ,route:'/appointments/all' },
+      // { sideBarItem: 'Reports', isSelected: false,route:'/'  },
       { sideBarItem: 'Your consultants', isSelected: false,route:'/'  },
       { sideBarItem: 'Chat with Dr', isSelected: false,route:'/chat'  }
    ])

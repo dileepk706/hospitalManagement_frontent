@@ -40,7 +40,13 @@ const LoginWithGoogle=()=>{
             const {accessToken,user}=User
                
             dispatch(updateUserCredentials({accessToken:accessToken,userImage:user?.image?user.image:'',userName:user?.name}))
-            navigate('/')
+            const bookingUrl=localStorage.getItem('bookingUrl')
+            if(bookingUrl){
+              navigate(`${bookingUrl}`)
+              
+            }else{
+              navigate('/')
+            }
           }
         } catch (error:any){
           console.log(error?.response);

@@ -19,6 +19,7 @@ const DoctorRouter:React.FC<applicationType>=()=> {
         <Route path='/login' element={!doctorToken && <LoginPage />} />
         <Route path='/' element={<DoctorProtected><DoctorHome /></DoctorProtected>} />
         <Route path='/add-schedule' element={<DoctorProtected><AddSchedulePage /></DoctorProtected>} />
+        
       </Routes>
     </>
   );

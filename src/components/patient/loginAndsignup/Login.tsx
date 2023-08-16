@@ -41,10 +41,17 @@ const Login:React.FC<LoginProps> = ({setIsLoginComponent} ) => {
           const User = await userLogin(values.email, values.password)
           if(User){
             const {accessToken,user}=User
-            console.log('accessToken',accessToken);
             
             dispatch(updateUserCredentials({accessToken:accessToken,userImage:user?.image?user.image:'',userName:user?.name}))
-            navigate('/')
+            const bookingUrl=localStorage.getItem('bookingUrl')
+            console.log('bookingUrl',bookingUrl);
+            
+            if(bookingUrl){
+              navigate(`${bookingUrl}`)
+              
+            }else{
+              navigate('/')
+            }
         }
         } catch (error:any) {
           error?.response?.data?.message && setApiError(error?.response?.data?.message)

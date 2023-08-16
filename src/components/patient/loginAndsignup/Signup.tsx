@@ -45,7 +45,12 @@ const Signup: React.FC<SignupProps> = ({ setIsLoginComponent }) => {
           if(User){
               const {accessToken,user}=User
               dispatch(updateUserCredentials({accessToken:accessToken,userImage:user?.image?user.image:'',userName:user?.name}))
-              navigate('/')
+              const bookingUrl=localStorage.getItem('bookingUrl')
+              if(bookingUrl){
+                navigate(`${bookingUrl}`)
+              }else{
+                navigate('/')
+              }
           }
           action.resetForm()
           setLoading(false)

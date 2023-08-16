@@ -6,6 +6,7 @@ const LoginPage=()=>{
 
     const [isLoginComponent,setIsLoginComponent]=useState(true)
     
+
     return(
         <>
         {isLoginComponent?<Login setIsLoginComponent={setIsLoginComponent}/>:<Signup setIsLoginComponent={setIsLoginComponent}/>}

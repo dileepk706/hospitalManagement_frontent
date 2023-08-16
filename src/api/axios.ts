@@ -12,8 +12,15 @@ api.interceptors.request.use(
     const doctorCredentials: any = localStorage.getItem('persist:doctor')
     const doctorCredentialObject = JSON.parse(doctorCredentials)
     const doctorToken = doctorCredentialObject?.accessToken.replace(/^"(.*)"$/, '$1');
-
-    config.headers['accessToken'] = `Bearer ${doctorToken}`;
+    const userCredentials: any = localStorage.getItem('persist:user')
+    const userCredentialsObject = JSON.parse(userCredentials)
+    const userToken = userCredentialsObject?.accessToken.replace(/^"(.*)"$/, '$1');
+    if(userToken){
+      config.headers['accessToken'] = `Bearer ${userToken}`;
+    }
+    if(doctorToken){
+      config.headers['accessTokenDoctor'] = `Bearer ${doctorToken}`;
+    }
 
 
     return config

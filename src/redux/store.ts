@@ -5,6 +5,7 @@ import doctorReducer from './doctor/doctorSlice'
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import pateintReducer from './patient/patientSlice'
+import paymentReducer from './patient/paymentSlicer'
 
 const userPersistConfig  = {
     key: 'user',
@@ -23,7 +24,8 @@ export const store=configureStore({
         doctors:doctorsDataReducer,
         searchParameteres:doctorSearchParamsReducer,
         user:persistedUserReducer,
-        doctor:presistDoctorReducer
+        doctor:presistDoctorReducer,
+        payment:paymentReducer
     }
 })
 

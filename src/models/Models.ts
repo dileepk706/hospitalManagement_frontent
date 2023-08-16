@@ -1,4 +1,5 @@
  export type DoctorType = {
+    _id:string;
     name?:string;
     email: string;
     password: string;
@@ -18,7 +19,26 @@
     consultingFee:number;
     rating:number
 }
-
+export type AddressType={
+    houseNo:string;
+    city:string;
+    state:string;
+    country:string
+}
+export type UserType = {
+    _id:string;
+    name?:string;
+    email: string;
+    password: string;
+    phone: string;
+    image: string;
+    address: AddressType;
+    dob: string;
+    desease:[];
+    isBlocked:boolean;
+    isMailVarified: boolean;
+    sex:string;
+}
 
 export type Slot={
     _id:string
@@ -31,4 +51,14 @@ export type slots={
     slot_date: string;
     isBooked?:boolean
     _id:string
+}
+export type Appointment={
+    _id:string;
+    user:string;
+    doctor:DoctorType;
+    isConsulted:boolean;
+    status:'pending'|'cancelled'|'notConsulted';
+    scheduledAt:slots
+    paymentStatus:'pending' | 'success';
+    consultingFee:number;
 }
