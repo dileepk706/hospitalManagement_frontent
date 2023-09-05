@@ -8,7 +8,7 @@ import { userLogin } from '../../../services/patients/patientLogin';
 import { useAppDispatch } from '../../../redux/hooks';
 import { updateUserCredentials } from '../../../redux/patient/patientSlice';
 import { useNavigate } from 'react-router-dom';
-
+  
 interface LoginProps {
   setIsLoginComponent: Function;
 }
@@ -17,9 +17,10 @@ interface initialValuesType {
   email: string;
   password: string;
 }
+
 const initialValues: initialValuesType = {
-  email: '',
-  password: ''
+  email: 'megha@gmail.com',
+  password: '1234567'
 }
 
 
@@ -42,7 +43,12 @@ const Login:React.FC<LoginProps> = ({setIsLoginComponent} ) => {
           if(User){
             const {accessToken,user}=User
             
-            dispatch(updateUserCredentials({accessToken:accessToken,userImage:user?.image?user.image:'',userName:user?.name}))
+            dispatch(updateUserCredentials({accessToken:accessToken,
+              userImage:user?.image?user.image:'',
+              userName:user?.name,
+              userEmail:user?.email,
+              userPhone:user?.phone?user?.phone:''
+            }))
             const bookingUrl=localStorage.getItem('bookingUrl')
             console.log('bookingUrl',bookingUrl);
             

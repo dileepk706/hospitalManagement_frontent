@@ -4,9 +4,10 @@ import { Avatar } from '@mui/material';
 import { useAppSelector } from '../../../redux/hooks';
 type NavProps = {
     toggleDrawer:Function
+    isAdmin?:boolean
 }
 
-const Nav: React.FC<NavProps> = ({toggleDrawer}) => {
+const Nav: React.FC<NavProps> = ({toggleDrawer,isAdmin}) => {
     const doctor = useAppSelector(state => state.doctor)
 
     return (
@@ -20,7 +21,7 @@ const Nav: React.FC<NavProps> = ({toggleDrawer}) => {
                 <Menu />
             </button>
             <div className='flex justify-between items-center gap-1'>
-                <p>Dr.{doctor?.doctorName}</p>
+                <p>{isAdmin?'Admin':'Dr.'} {doctor?.doctorName}</p>
                 <Avatar onClick={() => { }} alt="Remy Sharp" src={`${doctor?.doctorImage}`} />
             </div>
         </div>

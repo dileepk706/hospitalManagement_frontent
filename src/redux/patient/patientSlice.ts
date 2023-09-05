@@ -4,11 +4,15 @@ type InitialStateType={
     accessToken:string ;
     userName:string
     userImage:string
+    userPhone:string
+    userEmail:string
 }
 const initialState:InitialStateType={
     accessToken:'',
     userName:'',
-    userImage:''
+    userImage:'',
+    userPhone:'',
+    userEmail:''
 }
 const patientSlice=createSlice({
     name:'user',
@@ -17,6 +21,8 @@ const patientSlice=createSlice({
         updateUserCredentials:(state,action)=>{
             state.accessToken=action.payload?.accessToken
             state.userName=action.payload?.userName
+            state.userEmail=action.payload?.userEmail
+            state.userPhone=action.payload?.userPhone
             state.userImage=action.payload?.userImage
         },
         logoutPateint: (state, action) => {

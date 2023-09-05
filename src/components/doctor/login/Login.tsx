@@ -18,8 +18,8 @@ interface initialValuesType {
   password: string;
 }
 const initialValues: initialValuesType = {
-  email: '',
-  password: ''
+  email: 'rani@gmail.com',
+  password: '1234567'
 }
 
 

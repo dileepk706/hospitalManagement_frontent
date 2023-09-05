@@ -44,7 +44,7 @@ function PaymentSuccess() {
                 <div className='flex justify-center'>
                       <div className="py-10 px-10 text-center w-2/4">
                           <p className="px-12 them hover:bg-indigo-500 text-white font-semibold py-3">
-                              <Link to={'/appointments'}> GO BACK TO APPOINTMENTS</Link>
+                              <Link to={'/appointments/all'}> GO BACK TO APPOINTMENTS</Link>
                           </p>
                       </div>
                 </div>

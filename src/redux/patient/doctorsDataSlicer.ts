@@ -1,31 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from '@reduxjs/toolkit'
+import { DoctorType } from "../../types/Models";
 
-interface doctersType {
-    name: string;
-    biography: string;
-    consultingFee: number;
-    department: string
-    designation: string
-    email: string
-    image?: string
-    isBlocked: boolean
-    isMailVarified: boolean
-    phone: string
-    rating: number
-    review:[]
-    sex: string
-    yearOfExperiance: number
-    _id: string
-}
-
-const initialState:doctersType[]=[]
+ 
+const initialState:DoctorType[]=[]
 
 export const doctorsDataSlice=createSlice({
     name:'doctors',
     initialState,
     reducers:{
-        insertDoctors:(state,action:PayloadAction<doctersType[]>)=>{
+        insertDoctors:(state,action:PayloadAction<DoctorType[]>)=>{
             return action.payload
         }
     }

@@ -2,6 +2,7 @@ import { Send } from "@mui/icons-material"
 import { Button, Chip, Rating } from "@mui/material"
 import React from 'react'
 import { Link } from "react-router-dom"
+import { Review } from "../../../types/Models"
 
 type DoctorCardProps={
     id:string
@@ -10,7 +11,7 @@ type DoctorCardProps={
     image?:string
     experience:number
     cunsultingFee:number
-    review:[]
+    review:Review[]
     rating:number
 }
 
@@ -37,9 +38,7 @@ const DoctorCard:React.FC<DoctorCardProps> = ({DoctorName,department,image,exper
                     <p className="mt-2 text-sm ">{reviewCount?reviewCount:0} Patient Reviews</p>
                 </div>
                 <div className="flex justify-start mt-5 items-center gap-3">
-                    <Button variant="contained" endIcon={<Send />} size="small" color="success">
-                        Message
-                    </Button>
+                   
                     <Button variant="contained" size="small" color="primary">
                         <Link to={`/make-appointment/${id}`}>Make an appointment</Link>
                     </Button>

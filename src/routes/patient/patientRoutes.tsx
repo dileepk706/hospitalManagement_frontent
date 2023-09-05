@@ -10,6 +10,7 @@ import PaymentSuccess from '../../pages/patient/PaymentSuccess';
 import PaymentCancel from '../../pages/patient/PaymentCancelled';
 import AppointmentsPage from '../../pages/patient/AppointmentsPage';
 import ProfilePage from '../../pages/patient/ProfilePage';
+import VideoCall from '../../pages/patient/VideoCall';
 
 
 interface applicationType  {}
@@ -29,6 +30,7 @@ const PatientRouter:React.FC<applicationType>=()=> {
         <Route path='/payment-canceled' element={<PatientProtected><PaymentCancel /></PatientProtected>} />
         <Route path='/appointments/all' element={<PatientProtected><AppointmentsPage /></PatientProtected>} />
         <Route path='/profile' element={<PatientProtected>< ProfilePage/></PatientProtected>} />
+        <Route path='/call/:role/:room/:doc/:user' element={<PatientProtected>< VideoCall/></PatientProtected>} />
       </Routes>
   </>
   ); 

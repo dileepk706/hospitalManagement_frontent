@@ -5,9 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import persistor from './redux/store';
-import {store} from './redux/store';
+import { store } from './redux/store';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { PersistGate } from 'redux-persist/integration/react';
+import { ContextProvider } from './context/SocketProvider' 
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,9 +16,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIEN_ID || ''}>
     <React.StrictMode>
-    <Provider store={store}>  
+      <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <App />
+          <ContextProvider>
+            <App />
+          </ContextProvider>
         </PersistGate>
       </Provider>
     </React.StrictMode>

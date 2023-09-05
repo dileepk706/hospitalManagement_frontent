@@ -1,5 +1,5 @@
 import { api } from "../../api/axios";
-import { DoctorType } from "../../models/Models";
+import { DoctorType } from "../../types/Models";
 
 export const searchAllDoctorsBy_name_deprtmnt_health=async(sort:string,name:string,department:string,sex:string,gte:string,lte:string,rating:string):Promise<any>=>{
     try {

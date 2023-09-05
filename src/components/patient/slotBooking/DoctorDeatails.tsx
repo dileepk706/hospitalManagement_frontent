@@ -1,14 +1,15 @@
 import React, {useState } from 'react'
 import demoImg from '../../../assets/images/smiling-nurse-portrait-isolated-white-using-digital-tablet_53419-9441 (1).jpg'
 import { Avatar, Button, Rating } from '@mui/material'
-import { DoctorType } from '../../../models/Models'
+import { DoctorType } from '../../../types/Models'
 
 type DoctorDeatailsProps={
   doctor:DoctorType | undefined
   rating:number|undefined
+  setIsRevwMdalOpn: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const  DoctorDeatails:React.FC<DoctorDeatailsProps>=({doctor,rating})=> {
+const  DoctorDeatails:React.FC<DoctorDeatailsProps>=({doctor,rating,setIsRevwMdalOpn})=> {
   const [showMoreDscrptin, setShowMoreDscrptin] = useState<string>('overflow-hidden')
  
   return (
@@ -78,54 +79,36 @@ const  DoctorDeatails:React.FC<DoctorDeatailsProps>=({doctor,rating})=> {
 
         <div className='mt-[20px] mb-[10px] '>
           <p className=' text-lg fontstyles'>Patients reviews for Dr. Rani</p>
+
+          <p 
+          onClick={()=>setIsRevwMdalOpn(true)}
+          className="text-blue-500 my-2 hover:underline cursor-pointer">
+            Add a review
+          </p>
+
         </div>
 
         <hr className='w-full' />
 
         <div className='flex flex-col my-4 gap-2'>
 
-          <div className='flex p-[10px]'>
-            <div className='w-1/12'>
-              <Avatar />
-            </div>
-            <div className='flex flex-col w-11/12 pr-[20%]'>
-              <h3 className='text-lg text-gray-700 '> Dileep kumar </h3>
-              <p className='text-sm fontstyles text-gray-950 mt-[15px] '>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore voluptas excepturi, sss.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore voluptas excepturi, sss.
+            {
+            doctor?.reviews?.map((review, i) => (
+              <div className='flex p-[10px]'>
+                <div className='w-1/12'>
+                  <Avatar />
+                </div>
+                <div className='flex flex-col w-11/12 pr-[20%]'>
+                  <h3 className='text-lg text-gray-700 '> {review.patient.name} </h3>
+                  <p className='text-sm fontstyles text-gray-950 mt-[15px] '>
+                      {review.comment}
+                  </p>
+                </div>
+              </div>
 
-              </p>
-            </div>
-          </div>
-
-          <div className='flex p-[10px]'>
-            <div className='w-1/12'>
-              <Avatar />
-            </div>
-            <div className='flex flex-col w-11/12 pr-[20%]'>
-              <h3 className='text-lg text-gray-700 '> Dileep kumar </h3>
-              <p className='text-sm fontstyles text-gray-950 mt-[15px] '>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore voluptas excepturi, sss.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore voluptas excepturi, sss.
-
-              </p>
-            </div>
-          </div>
-
-          <div className='flex p-[10px]'>
-            <div className='w-1/12'>
-              <Avatar />
-            </div>
-            <div className='flex flex-col w-11/12 pr-[20%]'>
-              <h3 className='text-lg text-gray-700 '> Dileep kumar </h3>
-              <p className='text-sm fontstyles text-gray-950 mt-[15px] '>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore voluptas excepturi, sss.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore voluptas excepturi, sss.
-
-              </p>
-            </div>
-          </div>
-
+              ))
+            }
+        
         </div>
 
       </div>

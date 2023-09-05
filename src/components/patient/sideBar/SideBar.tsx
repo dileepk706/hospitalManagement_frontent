@@ -30,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
       { sideBarItem: 'Take an appointment', isSelected: false,route:'/book-slot'  },
       { sideBarItem: 'Appointments', isSelected: false ,route:'/appointments/all' },
       // { sideBarItem: 'Reports', isSelected: false,route:'/'  },
-      { sideBarItem: 'Your consultants', isSelected: false,route:'/'  },
+      // { sideBarItem: 'Your consultants', isSelected: false,route:'/'  },
       { sideBarItem: 'Chat with Dr', isSelected: false,route:'/chat'  }
    ])
 
@@ -89,26 +89,36 @@ const Sidebar: React.FC<SidebarProps> = () => {
    return (
       <>
          <StyledBox>
-            <Box sx={{ width: '60%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+            {/* <Box sx={{ width: '60%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                <Button onClick={toggleDrawer('left', true)}><Menu /></Button>
                <SearchBarAutocomplete />
-            </Box>
+            </Box> */}
+               <SearchBarAutocomplete />
+
+               <Box sx={{display:'flex',justifyContent:'space-evenly',alignItems:'center',gap:'20px'}}>
+                  
+                  <Link to={'/'}>Home</Link>
+                  <Link to={'/book-slot'}>Make appointment</Link>
+                  <Link to={'/appointments/all'}>Appointments</Link>
+
+               </Box>
 
             {patient?.accessToken ?
                (<Avatar onClick={()=>{
-                  dispatch(logoutPateint({}))
-                  localStorage.removeItem('user')
-                  navigate('/login')
+                  navigate('/profile')
+                  // dispatch(logoutPateint({}))
+                  // localStorage.removeItem('user')
+                  // navigate('/login')
                }} alt="Remy Sharp" src={patient?.userImage && `${patient?.userImage}`} />) :
                (<Button variant="outlined"><Link to={'/login'}>Login</Link></Button>)
             }
          </StyledBox>
-         <Drawer
+         {/* <Drawer
             open={state['left']}
             onClose={toggleDrawer('left', false)}
          >
             {list('left')}
-         </Drawer>
+         </Drawer> */}
       </>
    );
 }

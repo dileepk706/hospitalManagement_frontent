@@ -1,5 +1,5 @@
 import { api } from "../../api/axios";
-import { UserType } from "../../models/Models";
+import { DoctorType, UserType } from "../../types/Models";
 
  
 export const loginWithGoogle=async(email:string,name:string,picture:string):Promise<any>=>{
@@ -61,4 +61,14 @@ export const updateUser=async(name?:string, email?:string,age?:string,phone?:str
     const data = await res.data;
     return data
 }
- 
+
+export const editAppointmentStatus=async(id:string):Promise<any>=>{
+    const {data}=await api.put('edit-appointment-status', { id}) 
+    return data
+}
+
+export const addReviewRating=async(rating:number,review:string,doctor:string):Promise<DoctorType>=>{
+    const res=await api.put('review-rating', { rating,review,doctor}) 
+    const data:DoctorType=await res.data
+    return data
+}

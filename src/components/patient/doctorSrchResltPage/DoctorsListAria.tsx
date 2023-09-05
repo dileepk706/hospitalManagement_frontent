@@ -20,12 +20,16 @@ const DoctorsListAria = () => {
     const searchResltDoctors = useAppSelector(state => state.doctors)
     const applidFilters = useAppSelector(state => state.searchParameteres)
 
+    console.log(searchResltDoctors)
+
+
     useEffect(() => {
+
         let pricefilter = applidFilters.gte && applidFilters.lte ? `Price ${applidFilters.gte} to ${applidFilters.lte}` : undefined
         let sexfilter = applidFilters.sex ? `${applidFilters.sex} Doctor` : undefined
         if (pricefilter) setPriceFilter(pricefilter)
         if (sexfilter) setSexFilter(sexfilter)
-
+        
         if (applidFilters.sort) {
             let srtdBy = undefined
             if (applidFilters.sort === 'consultingFee1') srtdBy = 'Price low to high'
@@ -68,12 +72,12 @@ const DoctorsListAria = () => {
                 <div className="w-full  mx-auto flex flex-col mt-[41px]">
                     {isLoading?<LoadingSpinner/>:searchResltDoctors?.map((doc, i: number) => (
                         <DoctorCard
-                            DoctorName={doc.name}
+                            DoctorName={doc.name || ''}
                             cunsultingFee={doc.consultingFee}
-                            department={doc.department}
+                            department={doc.department.departmentName}
                             experience={doc.yearOfExperiance}
                             rating={doc.rating}
-                            review={doc.review}
+                            review={doc.reviews}
                             image={doc.image}
                             id={doc._id}
                             key={i} />

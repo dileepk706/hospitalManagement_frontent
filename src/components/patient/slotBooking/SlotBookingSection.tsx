@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from '@mui/material'
-import { DoctorType, slots } from "../../../models/Models";
+import { DoctorType, slots } from "../../../types/Models";
 import moment from 'moment'
 
 type SlotBookingSectionProps = {

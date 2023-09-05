@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect ,Suspense,lazy} from 'react';
 import { checkUserAuth } from '../../../utils/chekAuth';
 import { getUerInfo } from '../../../services/patients/patientLogin';
-import { UserType } from '../../../models/Models';
+import { UserType } from '../../../types/Models';
 const ProfileUpdateModal=lazy(() => import('./ProfileUpdateModal')) 
 // import { useFormik } from 'formik';
 // import ProfileUpdateModal from './ProfileUpdateModal';
@@ -111,7 +111,7 @@ const ProfileWrapper= () => {
             <div className=''>
               <p className='text-gray-600'>House No./Area</p>
               <div className='bg-gray-100 p-2 rounded'>
-                <h5 className='text-gray-800'>{user?.address.houseNo}</h5>
+                <h5 className='text-gray-800'>{user?.address?.houseNo}</h5>
               </div>
             </div>
           </div>
@@ -119,7 +119,7 @@ const ProfileWrapper= () => {
             <div className=''>
               <p className='text-gray-600'>City</p>
               <div className='bg-gray-100 p-2 rounded'>
-                <h5 className='text-gray-800'>{user?.address.city}</h5>
+                <h5 className='text-gray-800'>{user?.address?.city}</h5>
               </div>
             </div>
           </div>
@@ -127,7 +127,7 @@ const ProfileWrapper= () => {
             <div className=''>
               <p className='text-gray-600'>State</p>
               <div className='bg-gray-100 p-2 rounded'>
-                <h5 className='text-gray-800'>{user?.address.state}</h5>
+                <h5 className='text-gray-800'>{user?.address?.state}</h5>
               </div>
             </div>
           </div>
@@ -135,7 +135,7 @@ const ProfileWrapper= () => {
             <div className=''>
               <p className='text-gray-600'>Country</p>
               <div className='bg-gray-100 p-2 rounded'>
-                <h5 className='text-gray-800'>{user?.address.country}</h5>
+                <h5 className='text-gray-800'>{user?.address?.country}</h5>
               </div>
             </div>
           </div>

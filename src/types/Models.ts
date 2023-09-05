@@ -6,7 +6,7 @@
     phone: string;
     image: string;
     address: string;
-    dob: Date;
+    dob: string;
     isBlocked:boolean;
     isMailVarified: boolean;
     sex:string;
@@ -17,8 +17,16 @@
     yearOfExperiance:number;
     biography:string;
     consultingFee:number;
+    reviews:Review[]
     rating:number
 }
+
+export interface Review  {
+    rating:number
+    comment:string
+    patient:UserType
+}
+
 export type AddressType={
     houseNo:string;
     city:string;
@@ -29,12 +37,11 @@ export type UserType = {
     _id:string;
     name?:string;
     email: string;
-    password: string;
     phone: string;
     image: string;
     address: AddressType;
     dob: string;
-    desease:[];
+    desease:string;
     isBlocked:boolean;
     isMailVarified: boolean;
     sex:string;
@@ -54,11 +61,26 @@ export type slots={
 }
 export type Appointment={
     _id:string;
-    user:string;
+    user:UserType;
     doctor:DoctorType;
     isConsulted:boolean;
-    status:'pending'|'cancelled'|'notConsulted';
+    status:'consulted'|'cancelled'|'notConsulted';
     scheduledAt:slots
     paymentStatus:'pending' | 'success';
     consultingFee:number;
 }
+export interface Prescription {
+    doctor: DoctorType;
+    patient: UserType;
+    date: string;
+    prescriptionNumber?: string;
+    medicines:Medicine[]
+  }
+
+  export interface Medicine{
+    medicineName: string;
+    purpose: string;
+    dosage: string;
+    frequency: string;
+  }
+ 

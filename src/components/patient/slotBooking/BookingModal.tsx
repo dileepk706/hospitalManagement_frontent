@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { DoctorType, slots } from '../../../models/Models'
+import { DoctorType, slots } from '../../../types/Models'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../redux/hooks';
 import { chekout } from '../../../services/patients/patientLogin';

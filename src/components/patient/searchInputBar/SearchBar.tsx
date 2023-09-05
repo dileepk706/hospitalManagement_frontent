@@ -56,7 +56,7 @@ const SearchBarAutocomplete: React.FC = () => {
     }
     let name = searchQuery?.feild === 'Doctor' ? searchQuery?.name : ''
     let department = searchQuery?.feild === 'Department' ? searchQuery?._id : ''
-    //whenthe searching all other filters should be empty
+    //when the searching all other filters should be empty
     disptch(changeDepartment(''))
     disptch(changeSex(''))
     disptch(change_Gte_Lte({gte:'',lte:''}))
@@ -71,7 +71,7 @@ const SearchBarAutocomplete: React.FC = () => {
   }
 
   return (
-    <div className='flex flex-col relative w-3/4 '>
+    <div className='flex flex-col relative w-3/12 '>
       <div style={{ boxShadow: '0px 0px 8px #ddd' }} className='w-full h-9 border-none px-2.5 rounded-md bg-white flex items-center'>
         <Search />
         <input placeholder='Search doctors, deaprtment, health issues...' value={input} onChange={(e) => handleChange(e.target.value)} />

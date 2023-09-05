@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { profileSchema } from '../../../schema/patient';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { UserType } from '../../../models/Models';
+import { UserType } from '../../../types/Models';
 import { checkUserAuth } from '../../../utils/chekAuth';
 import { updateUser } from '../../../services/patients/patientLogin';
 

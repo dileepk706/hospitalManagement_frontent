@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { getAllAppointments } from '../../../services/patients/patientLogin';
-import { Appointment } from '../../../models/Models';
+import { Appointment } from '../../../types/Models';
 import { checkUserAuth } from '../../../utils/chekAuth';
 import { Link } from 'react-router-dom';
 import SingleAppointment from './SingleAppointment';
@@ -30,23 +30,12 @@ const AppointmentsWrapper= () => {
         setSingleAppointment(oneAppointment)
 
      }
-     console.log('appointmets : ',appointmens);
-     
-
-
-
-
-
-
-  
-
-
-
-
-
+      
     return (
         //article and news section 
         <div className='flex flex-col w-full  gap-3'>
+           
+
 
 
             {!isSingleAppointmentView ?
@@ -60,15 +49,20 @@ const AppointmentsWrapper= () => {
                         {appointmens?.map(appointment =>(
                             <div className='flex w-full justify-between border p-4 rounded-md shadow-md bg-white mb-2'>
                             <div className='flex flex-col'>
-                                <h1 className='text-xl font-semibold'>Dr. Rani</h1>
-                                <h4 className='text-gray-500'>20-12-2023</h4>
-                                <h4 className='text-gray-500'>4:00 PM</h4>
+                                <h1 className='text-xl font-semibold'>Dr. {appointment.doctor.name}</h1>
+                                <h4 className='text-gray-500'>{appointment.scheduledAt.slot_date}</h4>
+                                <h4 className='text-gray-500'>{appointment.scheduledAt.slot_time}</h4>
                             </div>
+                            <div className='my-auto '>
+
+                                <p className={`${appointment.status==='consulted'?`text-green-700`:`text-red-700`}`}>{appointment.status==='consulted'?'Consulted':'Not consulted'}</p>
+                            </div>
+
                             <div className='flex justify-center items-center space-x-3'>
                                 <button 
                                 
                                 className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'>
-                                    <Link to={'/'}>Book again</Link> 
+                                    <Link to={`/make-appointment/${appointment.doctor._id}`}>Book again</Link> 
                                 </button>
                                 <button 
                                 onClick={()=>singleAppointmentHelper(appointment?._id)}
@@ -84,11 +78,12 @@ const AppointmentsWrapper= () => {
 
 
                 ) : (
-                   
-<SingleAppointment 
-setIsSingleAppointmentView={setIsSingleAppointmentView} 
-singleAppointment={singleAppointment}
-/>
+
+                    <SingleAppointment
+                        setIsSingleAppointmentView={setIsSingleAppointmentView}
+                        singleAppointment={singleAppointment}
+                        setSingleAppointment={setSingleAppointment}
+                    />
 
                 )
             }

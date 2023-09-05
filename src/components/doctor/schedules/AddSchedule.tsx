@@ -11,7 +11,6 @@ import { checkDocterAuth } from '../../../utils/chekAuth';
 type AddScheduleProps = {}
 
 const AddSchedule: React.FC<AddScheduleProps> = () => {
-    const doctorid='64b2aed5acf52db5d40d0c99'
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
     const [startingTime, setStartingTime] = useState<string | null>(null);
     const [endingTime, setEndingTime] = useState<string | null>(null);
@@ -30,7 +29,7 @@ const AddSchedule: React.FC<AddScheduleProps> = () => {
     const CreateSloteHelper=async()=>{
         try {
             setApiError('')
-            const createdSlote = await CreateSlote(startingTime,endingTime,timeDuration,selectedDate,doctorid)
+            const createdSlote = await CreateSlote(startingTime,endingTime,timeDuration,selectedDate)
             console.log(createdSlote);
             
         } catch (error:any) {
