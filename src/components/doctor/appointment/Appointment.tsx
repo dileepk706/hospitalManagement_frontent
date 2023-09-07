@@ -23,6 +23,7 @@ function AppointmentWrapper() {
             checkDocterAuth(error)
         }
     }
+
   return (
     <>
        { 
@@ -30,9 +31,14 @@ function AppointmentWrapper() {
          <AppointmentTable 
          appointments={appointments} 
          setSingleAppointment={setSingleAppointment} 
-         setSingleAppointmentView={setSingleAppointmentView}/>
+         setSingleAppointmentView={setSingleAppointmentView}
+         
+         />
        ):(
-        <SingleAppointment singleAppointment={singleAppointment} setSingleAppointmentView={setSingleAppointmentView} />
+        <SingleAppointment 
+        singleAppointment={singleAppointment} 
+        setSingleAppointmentView={setSingleAppointmentView} 
+        getAppointmetnHelper={getAppointmetnHelper} />
        )
         }
     </>

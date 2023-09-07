@@ -22,19 +22,21 @@ type props={
     const [countdown, setCountdown] = useState('');
     const [showVedioBtn, setShowVedioBtn] = useState(false);
     const [startVideoCall,setStartVideoCall]=useState(false)
-
-    console.log(singleAppointment?.doctor._id,singleAppointment?.user._id)
+    const [cancellationModalOpen,setcancellationModalOpen]=useState(false)
+    const [cancellationRequested,setcancellationRequested]=useState(false)
+    const [apiError,setApiError]=useState('')
+    const [appointment,setAppointment]=useState(singleAppointment)
+    
 
     
     const user=useAppSelector(state=>state.user)
 
      const updateCountdown = () => {
-        const targetDate = singleAppointment?.scheduledAt.slot_date;
-        const targetTime =singleAppointment?.scheduledAt.slot_time;
+        const targetDate = appointment?.scheduledAt.slot_date;
+        const targetTime =appointment?.scheduledAt.slot_time;
         const targetDateTime = moment(`${targetDate} ${targetTime}`, 'YYYY-MM-DD h:mm A');
         const currentDateTime = moment();
         const duration = moment.duration(targetDateTime.diff(currentDateTime));
-        console.log(duration._data.minutes);
 
         const days = Math.floor(duration.asDays());
         const hours = Math.floor(duration.asHours()) % 24;
@@ -47,15 +49,15 @@ type props={
           setCountdown('Countdown expired');
           setShowVedioBtn(false)
 
-          if (singleAppointment?.status !== 'notConsulted') {
-             editAppointmentStatus(singleAppointment?._id?singleAppointment?._id:'' ).then(res => {
-              setSingleAppointment(res.data)
-            }).catch((err:any )=> {
-              console.log(err);
-              checkUserAuth(err)
+          // if (singleAppointment?.status !== 'notConsulted') {
+          //    editAppointmentStatus(singleAppointment?._id?singleAppointment?._id:'' ).then(res => {
+          //     setSingleAppointment(res.data)
+          //   }).catch((err:any )=> {
+          //     console.log(err);
+          //     checkUserAuth(err)
 
-            })
-          }
+          //   })
+          // }
           
         } else {
           setCountdown(`${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`);
@@ -71,7 +73,7 @@ type props={
     // Update the countdown every second
     let countdownInterval :any
     
-    if(singleAppointment?.status==='notConsulted' && singleAppointment.isConsulted===false  ){
+    if(appointment?.status==='notConsulted' && appointment.isConsulted===false  ){
       countdownInterval = setInterval(updateCountdown, 1000);
     }
     return () => {
@@ -81,7 +83,8 @@ type props={
 
 
   const handleVedioConsulting = useCallback(() => {
-    socket.emit("room:join", { email: user?.userName, room: singleAppointment?._id });
+    
+    socket.emit("room:join", { email: user?.userName, room: appointment?._id });
   }, [socket]);
 
   const handleJoinRoom = useCallback(
@@ -89,7 +92,7 @@ type props={
       const { email, room } = data;
       console.log('data from backend', email, room)
       
-      navigate(`/call/patient/${room}/${singleAppointment?.doctor._id}/${singleAppointment?.user._id}`);
+      navigate(`/call/patient/${room}/${appointment?.doctor._id}/${appointment?.user._id}`);
     },
     [navigate]
   );
@@ -101,6 +104,24 @@ type props={
     };
   }, [socket]);
 
+  const handleAppointMentCancellation=async (id:string)=>{
+
+   
+   try {
+    const res=await api.put('cancell-appointment',{id})
+    const data:Appointment=await res.data
+    console.log(data)
+    setAppointment(data)
+    setcancellationRequested(true)
+} catch (error:any) {
+    console.log(error);
+    error?.response?.data?.message && setApiError(error?.response?.data?.message)
+    checkUserAuth(error)
+}
+
+  }
+
+  
   return (
     <>
      
@@ -108,11 +129,17 @@ type props={
       <div className='col-span-1'>
         <div className='mb-4'>
           <div className='flex justify-between'>
-            <h3 className='text-sm font-semibold'>On {singleAppointment?.scheduledAt.slot_date}</h3>
-            <h3 className='text-sm font-semibold'>At {singleAppointment?.scheduledAt.slot_time}</h3>
+            <h3 className='text-sm font-semibold'>On {appointment?.scheduledAt.slot_date}</h3>
+            <h3 className='text-sm font-semibold'>At {appointment?.scheduledAt.slot_time}</h3>
           </div>
           <div className='mt-2'>
-            <button className='text-blue-500 hover:underline text-xs'>Change Date and Time</button>
+            <button 
+            onClick={()=>{
+              setcancellationModalOpen(true)
+            }}
+            className='text-blue-500 hover:underline text-xs'>
+              Cancell Appointment
+            </button>
           </div>
         </div>
     
@@ -123,10 +150,10 @@ type props={
             <img src={demoImg} alt="Doctor" className='w-12 h-12 rounded-full' />
           </div>
           <div className='w-[90%] ml-4'>
-            <h1 className='text-lg font-semibold'>Dr. {singleAppointment?.doctor.name}</h1>
+            <h1 className='text-lg font-semibold'>Dr. {appointment?.doctor.name}</h1>
             <h2 className='text-gray-500 text-xs'>MBBS</h2>
-            <h2 className='text-gray-500 text-xs'>{singleAppointment?.scheduledAt.slot_date}</h2>
-            <h2 className='text-violet-900 text-sm'>₹ {singleAppointment?.consultingFee}</h2>
+            <h2 className='text-gray-500 text-xs'>{appointment?.scheduledAt.slot_date}</h2>
+            <h2 className='text-violet-900 text-sm'>₹ {appointment?.consultingFee}</h2>
           </div>
         </div>
   
@@ -149,8 +176,12 @@ type props={
              
               <div className='mt-4 space-y-2'>
                   <div>
+                      <p className='text-gray-500 text-xs'>Appointment Status</p>
+                      <h4 className='text-sm font-semibold text-purple-900'>{appointment?.status}</h4>
+                  </div>
+                  <div>
                       <p className='text-gray-500 text-xs'>Appointment Id</p>
-                      <h4 className='text-sm font-semibold'>{singleAppointment?._id}</h4>
+                      <h4 className='text-sm font-semibold'>{appointment?._id}</h4>
                   </div>
                   <div>
                       <p className='text-gray-500 text-xs'>Patient Name</p>
@@ -173,16 +204,17 @@ type props={
               <p className='txt-them text-xs'>Your consultaiton will be activate before the 5 min of your time</p>
               </div>
               <div className='mt-4'>
-              <Button size='small' variant="contained"
+              {/* <Button size='small' variant="contained"
                 onClick={()=>{
                   handleVedioConsulting()
                 }}
-                 > Consult Now</Button>
-            {/* {
-              showVedioBtn && singleAppointment?.status === 'pending' && singleAppointment.isConsulted === false ? (
+                 > Consult Now</Button> */}
+            {
+            appointment?.status === 'notConsulted'? (
                 <Button size='small' variant="contained"
                 onClick={()=>{
                   setStartVideoCall(true)
+                  handleVedioConsulting()
                 }}
                  > Consult Now</Button>
               ) : (
@@ -190,12 +222,12 @@ type props={
                   Consult Now
                 </Button>
               )
-            } */}
+            }
                   
               </div>
           </div>
   
-          <div className='flex justify-between items-center mb-4 absolute top-1 right-1'>
+          <div className='flex justify-between items-center mb-4 absolute top-1 left-1'>
                   <button
                       className='text-gray-500 hover:text-gray-700 flex items-center'
                       onClick={()=>setIsSingleAppointmentView(false)} // Add your onClick handler here
@@ -209,8 +241,50 @@ type props={
               
       </div>
    
-
-
+      {
+        cancellationModalOpen&&(
+          <div className='fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-500 bg-opacity-50'>
+          <div className='bg-white p-6 rounded shadow-md w-96'>
+            <div className='flex flex-col items-center justify-center gap-3'>
+            <h1 className='text-sm font-semibold txt-them' >Do you want to cancell the appointment</h1>
+            {
+              apiError&&( <h1 className='text-sm text-red-600  my-3' >{apiError}</h1>)
+            }
+         
+            </div>
+            {cancellationRequested?(
+              <div className='flex flex-col items-center justify-center gap-3'>
+                <h1 className='text-sm font-semibold text-green-800' >Cancellation requested Succefully</h1>
+                  <Button
+                    onClick={() => {
+                      setcancellationRequested(false)
+                      setcancellationModalOpen(false)
+                    }}
+                    variant='contained' size='small' color='primary' >
+                    Close
+                  </Button>
+              </div>
+            ):(
+              <div  className='flex items-center justify-center gap-5'>
+              <Button 
+              onClick={()=>setcancellationModalOpen(false)}
+              variant='contained' size='small' color='primary' >
+                No
+              </Button>
+              <Button 
+              onClick={()=>{
+                handleAppointMentCancellation(appointment?._id || '')
+              }}
+              variant='contained' size='small' color='error' >
+                Yes
+              </Button>
+            </div>
+            )}
+          </div>
+        </div>
+        )
+      }
+     
     
     </>
   )

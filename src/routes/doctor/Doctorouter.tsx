@@ -11,6 +11,7 @@ import Appointments from '../../pages/doctor/Appointments';
 import ProfilePage from '../../pages/doctor/ProfilePage';
 import VideoCall from '../../pages/patient/VideoCall';
 import SinglePatient from '../../components/doctor/userList/SinglePatient';
+import DoctorDashboard from '../../pages/doctor/DoctorDashboard';
 interface applicationType  {}
                           
 const DoctorRouter:React.FC<applicationType>=()=> {
@@ -30,6 +31,7 @@ const DoctorRouter:React.FC<applicationType>=()=> {
         <Route path='/profile' element={<DoctorProtected><ProfilePage /></DoctorProtected>} />
         <Route path='/room' element={<DoctorProtected><VideoCall /></DoctorProtected>} />
         <Route path='/call/:role/:room/:doc/:user' element={<DoctorProtected>< VideoCall/></DoctorProtected>} />
+        <Route path='/dashboard' element={<DoctorProtected>< DoctorDashboard/></DoctorProtected>} />
       </Routes>
     </>
   );

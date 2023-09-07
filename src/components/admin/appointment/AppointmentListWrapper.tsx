@@ -25,6 +25,14 @@ function AppointmentListWrapper() {
     {
       option:'notConsulted',
       isSelected:false
+    },
+    {
+      option:'cancellation-requested',
+      isSelected:false
+    },
+    {
+      option:'cancelled',
+      isSelected:false
     }
 ]
   useEffect(() => {

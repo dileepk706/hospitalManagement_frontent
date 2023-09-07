@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch } from '../../redux/hooks'
 import { changePaymentStatus } from '../../redux/patient/paymentSlicer'
 import { bookSlote } from '../../services/patients/patientLogin'
@@ -8,25 +8,26 @@ import { checkUserAuth } from '../../utils/chekAuth'
 function PaymentSuccess() {
     const dispatch=useAppDispatch()
     dispatch(changePaymentStatus(true))
+    const navigate=useNavigate()
     const { doctorId, slotId,fee } = useParams();
     const [isLoading,setisLoading]=useState(false)
     
 
     useEffect(() => {
-        const sloteBookingHelper = async () => {
-            try {
-                setisLoading(true)
-                const cousltingFee:number = parseInt(fee || '')
-                const bookedSlote = await bookSlote(doctorId,slotId,cousltingFee)
-                console.log('bookedSlote ', bookedSlote);
-                
-            } catch (error) {
-                console.error(error);
-                checkUserAuth(error)
-            }
-        }
-        sloteBookingHelper()
+        
     }, [])
+    const sloteBookingHelper = async () => {
+        try {
+            setisLoading(true)
+            const cousltingFee:number = parseInt(fee || '')
+            const bookedSlote = await bookSlote(doctorId,slotId,cousltingFee)
+            console.log('bookedSlote ', bookedSlote);
+            
+        } catch (error) {
+            console.error(error);
+            checkUserAuth(error)
+        }
+    }
   return (
       <div className="bg-gray-100 h-screen items-center justify-center">
           <div className="bg-white h-full mt-[10%] p-6 md:mx-auto">
@@ -43,8 +44,14 @@ function PaymentSuccess() {
 
                 <div className='flex justify-center'>
                       <div className="py-10 px-10 text-center w-2/4">
-                          <p className="px-12 them hover:bg-indigo-500 text-white font-semibold py-3">
-                              <Link to={'/appointments/all'}> GO BACK TO APPOINTMENTS</Link>
+                          <p 
+                          onClick={()=>{
+                            sloteBookingHelper()
+                            navigate('/appointments/all')
+                          }}        
+                          className="px-12 them hover:bg-indigo-500 text-white font-semibold py-3">
+                            GO BACK TO APPOINTMENTS
+                              {/* <Link to={'/appointments/all'}> GO BACK TO APPOINTMENTS</Link> */}
                           </p>
                       </div>
                 </div>

@@ -1,37 +1,36 @@
 import React from 'react'
-import { UserType } from '../../../types/Models'
+import { DoctorType, UserType } from '../../../types/Models'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '@mui/material'
-import { blockOrUnblockPatient } from '../../../services/admin/adminApi'
+import { blockOrUnblockDoctor, blockOrUnblockPatient } from '../../../services/admin/adminApi'
 import { checkDocterAuth } from '../../../utils/chekAuth'
 
-type UserTableProps={
-    patients: UserType[] | null
-    isAdmin?:boolean
-    handleGetPateints?: () => Promise<void>
-    setPatients?: React.Dispatch<React.SetStateAction<UserType[] | null>>
+type DoctorTableProps={
+    doctors: DoctorType[] | null
+    setDoctor?: React.Dispatch<React.SetStateAction<DoctorType[] | null>>
 }
-const UserTable:React.FC<UserTableProps>=({patients,isAdmin,handleGetPateints,setPatients}) =>{
+
+const  DoctorTable:React.FC<DoctorTableProps>=({doctors,setDoctor})=> {
 
     const navigate=useNavigate()
 
-    const blockPatientHanlder=async (id:string,block:boolean,patnt:UserType,indx:number)=>{
+    const blockDoctorHanlder=async (id:string,block:boolean,doc:DoctorType,indx:number)=>{
 
       const action=block?'unblock':'block'
 
       try {
-        const message= await blockOrUnblockPatient(id,action)
+        const message= await blockOrUnblockDoctor(id,action)
         // const Patient={...patient,isBlocked:message==='User blocked succesfully'?true:false}
-        const updatedPatient=patients?.map((e,i)=>{
+        const updatedDoctor=doctors?.map((e,i)=>{
           if(indx===i){
-            return {...patnt,isBlocked:action==='unblock'?false:true}
+            return {...doc,isBlocked:action==='unblock'?false:true}
           }else{
             return e
           }
         })
-        if(updatedPatient && setPatients){
+        if(updatedDoctor && setDoctor){
 
-          setPatients(updatedPatient)
+            setDoctor(updatedDoctor)
         }
         
       
@@ -60,11 +59,26 @@ const UserTable:React.FC<UserTableProps>=({patients,isAdmin,handleGetPateints,se
                 <th scope="col" className="px-6 py-3">
                   Email
                 </th>
-                {isAdmin && (
-                  <th scope="col" className="px-6 py-3">
+                <th scope="col" className="px-6 py-3">
+                  Gender
+                </th>
+
+                <th scope="col" className="px-6 py-3">
+                  Fee
+                </th>
+                <th scope="col" className="px-6 py-3">
+                  Department
+                </th>
+                <th scope="col" className="px-6 py-3">
+                Designation
+                </th>
+                <th scope="col" className="px-6 py-3">
+                Experience
+                </th>
+                
+                <th scope="col" className="px-6 py-3">
                   Block or Unblock
                 </th>
-                )}
                 <th scope="col" className="px-6 py-3">
                   Action
                 </th>
@@ -72,7 +86,7 @@ const UserTable:React.FC<UserTableProps>=({patients,isAdmin,handleGetPateints,se
             </thead>
             <tbody>
               {
-                patients && patients?.map((patient,i) => {
+                doctors && doctors?.map((patient,i) => {
                   return (
                     <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                       <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -88,18 +102,30 @@ const UserTable:React.FC<UserTableProps>=({patients,isAdmin,handleGetPateints,se
                       <td className="px-6 py-4">
                         {patient.email}
                       </td>
-                      {
-                        isAdmin && (
+                      <td className="px-6 py-4">
+                        {patient.sex}
+                      </td>
+                      <td className="px-6 py-4">
+                        {patient.consultingFee}
+                      </td>
+                      <td className="px-6 py-4">
+                        {patient.department.departmentName}
+                      </td>
+                      <td className="px-6 py-4">
+                        {patient.designation}
+                      </td>
+                      <td className="px-6 py-4">
+                        {patient.yearOfExperiance}
+                      </td>
                           <td className="px-6 py-4">
                             <Button
-                            onClick={()=>blockPatientHanlder(patient._id,patient.isBlocked,patient,i)}
+                            onClick={()=>blockDoctorHanlder(patient._id,patient.isBlocked,patient,i)}
                              variant='contained' size='small' color={patient.isBlocked?`primary`:`error`} >
                               
                                 {patient.isBlocked?`Unblock`:`Block`}
                             </Button>
                           </td>
-                        )
-                      }
+                      
                       <td className="px-6 py-4">
                         <p onClick={() => {
                           navigate(`${patient._id}`)
@@ -124,4 +150,4 @@ const UserTable:React.FC<UserTableProps>=({patients,isAdmin,handleGetPateints,se
   )
 }
 
-export default UserTable
+export default DoctorTable

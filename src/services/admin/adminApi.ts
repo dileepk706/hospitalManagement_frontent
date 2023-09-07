@@ -1,5 +1,6 @@
 import { api } from "../../api/axios";
-import { Prescription, UserType } from "../../types/Models";
+import { initialValuesType } from "../../components/admin/doctors/DoctorAddForm";
+import { DoctorType, Prescription, UserType } from "../../types/Models";
 
 export const getAppointments=async(filter?:string):Promise<any>=>{
     try {
@@ -36,3 +37,47 @@ export const blockOrUnblockPatient=async(id:string,action:string):Promise<any>=>
     return data
 }
  
+export const getAllDoctor=async( name?:string,department?:string,sex?:string,gte?:string,lte?:string,sort?:string):Promise<DoctorType[]>=>{
+
+    name=name?name:''
+    department=department?department:''
+    sex=sex?sex:''
+    gte=gte?gte:''
+    lte=lte?lte:''
+    sort=sort?sort:''
+
+    const res = await api.get(`/admin/all-doctor?name=${name}&department=${department}&sex=${sex}&gte=${gte}&lte=${lte}&sort=${sort}`);
+    const data:DoctorType[] = await res.data
+    return data
+}
+
+export const getOneDoctor=async( id:string):Promise<DoctorType[]>=>{
+
+    const res = await api.get(`/admin/doctor/${id}`);
+    const data:DoctorType[] = await res.data
+    return data
+}
+
+export const blockOrUnblockDoctor=async(id:string,action:string):Promise<any>=>{
+    
+    const res = await api.patch(`/admin/block-unblock-doctor?id=${id}&action=${action}`);
+    const data = await res.data
+    return data
+}
+
+export const createDoctor=async(doctor:initialValuesType):Promise<any>=>{
+    const res = await api.post(`/admin/add-doctor`,{
+        name:doctor.name,
+        email:doctor.email,
+        phone:doctor.phone,
+        dob:doctor.age,
+        sex:doctor.sex,
+        designation:doctor.education,
+        department:doctor.department,
+        yearOfExperiance:doctor.experience,
+        biography:doctor.biography,
+        consultingFee:doctor.fee
+    });
+    const data = await res.data
+    return data
+}

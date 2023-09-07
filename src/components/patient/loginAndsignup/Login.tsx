@@ -105,7 +105,9 @@ const Login:React.FC<LoginProps> = ({setIsLoginComponent} ) => {
                     onBlur={handleBlur}
                     placeholder='Email address' className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  ' />
                   {errors.email && touched.email && <p className='text-red-600 text-sm '>{errors.email}</p>}
-                  {apiError==='User is not exist' &&   <p className='text-red-600 text-sm '>{apiError}</p>}
+                  {apiError==='User is not exist'  &&   <p className='text-red-600 text-sm '>{apiError}</p>}
+                  {apiError==='User is blocked by admin' &&   <p className='text-red-600 text-sm '>{apiError}</p>}
+
                
                 </div>
 

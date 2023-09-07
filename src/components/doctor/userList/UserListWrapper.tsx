@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { getPatients } from '../../../services/doctor/slots'
 import { Appointment, UserType } from '../../../types/Models'
 import { checkDocterAuth } from '../../../utils/chekAuth'
-import SinglePatient from './SinglePatient'
-import PrescrptnSingleModal from '../prescription/PrescrptnSingleModal'
+ 
 import { useNavigate } from 'react-router-dom'
 import UserTable from './UserTable'
 
@@ -11,9 +10,7 @@ const UserListWrapper = () => {
 
   const navigate=useNavigate()
   const [patients, setPatients] = useState<UserType[] | null>(null)
-  const [searchInpt, setearchinpt] = useState('')
-  const [singlePatient, setSinglePatient] = useState<UserType|undefined>(undefined)
-  const [singlePatientView, setSinglePatientView] = useState(false)
+  
 
   useEffect(() => {
 

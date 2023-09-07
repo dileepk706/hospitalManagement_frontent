@@ -45,6 +45,7 @@ export type UserType = {
     isBlocked:boolean;
     isMailVarified: boolean;
     sex:string;
+    wallet?:number
 }
 
 export type Slot={
@@ -64,7 +65,7 @@ export type Appointment={
     user:UserType;
     doctor:DoctorType;
     isConsulted:boolean;
-    status:'consulted'|'cancelled'|'notConsulted';
+    status:'consulted'|'cancelled'|'notConsulted'|'cancellation-requested';
     scheduledAt:slots
     paymentStatus:'pending' | 'success';
     consultingFee:number;

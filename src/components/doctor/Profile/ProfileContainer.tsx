@@ -3,9 +3,13 @@ import { DoctorType } from '../../../types/Models';
 import { getDoctorInfo } from '../../../services/doctor/slots';
 import { checkDocterAuth } from '../../../utils/chekAuth';
 import ProfileUpdateModal from './ProfileUpdateModal';
+import { useParams } from 'react-router-dom';
+import { getOneDoctor } from '../../../services/admin/adminApi';
 
 function ProfileContainer() {
   
+
+  const {id}=useParams()
     
     const [doctor,setDoctor]=useState<DoctorType|undefined>(undefined)
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,7 +27,12 @@ function ProfileContainer() {
     useEffect(()=>{
         const getUser=async()=>{
            try {
-              const Doctor=await getDoctorInfo()
+              let Doctor
+              if(!id){
+                Doctor=await getDoctorInfo()
+              }else{
+                Doctor=await getOneDoctor(id)
+              }
               console.log('Doctor :',Doctor)
               setDoctor(Doctor)
            } catch (error:any) {

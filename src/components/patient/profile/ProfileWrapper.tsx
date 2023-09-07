@@ -70,6 +70,16 @@ const ProfileWrapper= () => {
               <h4 className='text-gray-800'>{user?.name}</h4>
             </div>
           </div>
+         {
+          user?.wallet&&(
+            <div className='flex-grow px-10 '>
+            <label className='block text-gray-600 mb-1'>Wallet Amount</label>
+            <div className='bg-gray-100 p-2 rounded'>
+              <h4 className='text-green-800 font-bold'>₹ {user?.wallet}</h4>
+            </div>
+          </div>
+          )
+         }
         </div>
         <hr className='my-2 border-gray-300' />
       

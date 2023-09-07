@@ -71,16 +71,13 @@ const Drawer:React.FC<drawerProp> = ({isAdmin}) => {
         <div className="py-4 overflow-y-auto">
           <ul className="space-y-2 font-medium">
 
-          <SideBarList titleName='Home' path='home'/>
+          <SideBarList titleName='Dashboard' path='dashboard'/>
           {/* <SideBarList titleName='Profile' path='profile'/> */}
           <SideBarList titleName='Appointmets' path='appointments'/>
           <SideBarList titleName='Pateints' path='patients'/>
-          <SideBarList titleName='Doctors' path='doctors'/>
-
-
               
 
-            {/* <li>
+            <li>
               <button
                 type="button"
                 className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
@@ -89,7 +86,7 @@ const Drawer:React.FC<drawerProp> = ({isAdmin}) => {
               >
                 <CalendarMonth/>
                 <span className="flex-1 ml-3 text-left whitespace-nowrap">
-                Schedule
+                Doctor
                 </span>
                 <svg
                   className={`w-3 h-3 ${
@@ -121,8 +118,8 @@ const Drawer:React.FC<drawerProp> = ({isAdmin}) => {
                   <p
                     className="flex cursor-pointer items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                   >
-                    <Link to={'add-schedule'}>
-                      Add schedule
+                    <Link to={'add-doctors'}>
+                      Add Doctor
                     </Link>
                   </p>
                 </li>
@@ -130,12 +127,14 @@ const Drawer:React.FC<drawerProp> = ({isAdmin}) => {
                   <p
                     className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                   >
-                    List schedule
+                    <Link to={'doctors'}>
+                    Doctors
+                    </Link>
                   </p>
                 </li>
                 
               </ul>
-            </li> */}
+            </li>
            
            
 

@@ -41,9 +41,8 @@ useEffect(() => {
   };
 }, []);
 return (
-  <motion.div //animation
-    animate={{ x: [1000, -30, 0] }}
-    transition={{ delay: 1, duration: 0.6, ease: 'easeIn' }}
+  <div //animation
+     
     ref={dropdownRef} className="hidden md:inline-block relative  text-left shadow-[0_10px_25px_rgba(8,_112,_184,_0.7)]">
     <div>
       <button
@@ -89,7 +88,7 @@ return (
 
       </div>
     </div>
-  </motion.div>
+  </div>
 )
 }
 

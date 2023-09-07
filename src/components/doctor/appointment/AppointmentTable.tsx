@@ -64,7 +64,7 @@ const AppointmentTable:React.FC<AppointmentTableProps>=({appointments,setSingleA
                                             {appointment.scheduledAt.slot_time}
                                           </td>
                                           <td className={`px-6 py-4`}>
-                                            <p className={`${appointment.status==='consulted'?`text-green-700`:`text-red-700`}`}>{appointment.status==='consulted'?'Consulted':'Not consulted'}</p>
+                                            <p className={`${appointment.status==='consulted'?`text-green-700`:`text-red-700`}`}>{appointment.status}</p>
                                           </td>
                                           <td className="px-6 py-4">
                                             
@@ -72,9 +72,9 @@ const AppointmentTable:React.FC<AppointmentTableProps>=({appointments,setSingleA
                                           
                                           <td className="px-6 py-4">
                                             <p onClick={() => {
-                                                const onePateint = appointments?.find(appointmnt => appointmnt.user._id === appointment.user._id)
+                                                // const onePateint = appointments?.find(appointmnt => appointmnt.user._id === appointment.user._id)
                                                 
-                                                  setSingleAppointment(onePateint)
+                                                  setSingleAppointment(appointment)
                                                   setSingleAppointmentView(true)
                                                   
                                             }}
