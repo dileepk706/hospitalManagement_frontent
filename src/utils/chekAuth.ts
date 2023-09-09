@@ -21,3 +21,9 @@ export const checkAdminAuth=(error:any)=>{
         window.location.href = '/admin/login';
     }
 }
+
+export const removeDuplicates = (arr:any) => {
+    const strArr = arr.map((obj:any) => JSON.stringify(obj));
+    const uniq = [...new Set(strArr)].map((u:any) => JSON.parse(u));
+    return uniq;
+  };

@@ -26,8 +26,9 @@ const Sidebar: React.FC<SidebarProps> = () => {
    
    const [options, setOptions] = useState<optionType[]>([
       { sideBarItem: 'Home', isSelected: true,route:'/' },
-      { sideBarItem: 'Profile', isSelected: false,route:'/profile'  },
       { sideBarItem: 'Appointments', isSelected: false ,route:'/appointments/all' },
+      { sideBarItem: 'Prescriptions', isSelected: false ,route:'/doctors/consulted' },
+      { sideBarItem: 'Profile', isSelected: false,route:'/profile'  },
    ])
 
    
@@ -101,7 +102,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
                      options.map(e=>(
                         <p 
                         onClick={()=> changeIsSelected(e.sideBarItem)}
-                        className={` font-bold text-lg ${e.isSelected?` txt-them`:`text-gray-800`}`} >
+                        className={` font-bold text-lg font-mono ${e.isSelected?` txt-them`:`text-gray-800`}`} >
 
                            <Link to={`${e.route}`}>{e.sideBarItem}</Link>
                         </p>

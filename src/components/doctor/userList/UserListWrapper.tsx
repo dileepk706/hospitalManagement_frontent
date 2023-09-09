@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getPatients } from '../../../services/doctor/slots'
 import { Appointment, UserType } from '../../../types/Models'
-import { checkDocterAuth } from '../../../utils/chekAuth'
+import { checkDocterAuth, removeDuplicates } from '../../../utils/chekAuth'
  
 import { useNavigate } from 'react-router-dom'
 import UserTable from './UserTable'
@@ -30,11 +30,7 @@ const UserListWrapper = () => {
     }
   }
 
-  const removeDuplicates = (arr:any) => {
-    const strArr = arr.map((obj:any) => JSON.stringify(obj));
-    const uniq = [...new Set(strArr)].map((u:any) => JSON.parse(u));
-    return uniq;
-  };
+
 
   console.log(patients);
 

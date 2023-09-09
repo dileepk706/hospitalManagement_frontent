@@ -6,10 +6,9 @@ import { DoctorType } from '../../../types/Models'
 type DoctorDeatailsProps={
   doctor:DoctorType | undefined
   rating:number|undefined
-  setIsRevwMdalOpn: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const  DoctorDeatails:React.FC<DoctorDeatailsProps>=({doctor,rating,setIsRevwMdalOpn})=> {
+const  DoctorDeatails:React.FC<DoctorDeatailsProps>=({doctor,rating})=> {
   const [showMoreDscrptin, setShowMoreDscrptin] = useState<string>('overflow-hidden')
  
   return (
@@ -80,12 +79,7 @@ const  DoctorDeatails:React.FC<DoctorDeatailsProps>=({doctor,rating,setIsRevwMda
         <div className='mt-[20px] mb-[10px] '>
           <p className=' text-lg fontstyles'>Patients reviews for Dr. Rani</p>
 
-          <p 
-          onClick={()=>setIsRevwMdalOpn(true)}
-          className="text-blue-500 my-2 hover:underline cursor-pointer">
-            Add a review
-          </p>
-
+          
         </div>
 
         <hr className='w-full' />

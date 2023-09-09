@@ -5,10 +5,11 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { Button } from '@mui/material';
 import logo from '../../../assets/images/logo.png'
+import { Download } from '@mui/icons-material';
 
 type PrescrptnSingleModalProp={
 	singlePrescription: Prescription | undefined
-	setiSinglePrescrption: React.Dispatch<React.SetStateAction<Prescription | undefined>>
+	setiSinglePrescrption?: React.Dispatch<React.SetStateAction<Prescription | undefined>>
 	setPrescrptnSingleModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -37,18 +38,20 @@ const  PrescrptnSingleModal:React.FC<PrescrptnSingleModalProp>=({singlePrescript
 
 		  <button
 		  	  onClick={()=>{
-				setiSinglePrescrption(undefined)
 				setPrescrptnSingleModalOpen(false)
+				if(setiSinglePrescrption){
+				setiSinglePrescrption(undefined)
+				}
 			}}
 			  className='bg-gray-600 border border-white absolute text-white px-4 py-2 rounded hover:bg-gray-600 top-[10%] right-[5%] '>
 			  Close
 		  </button>
 
-		  <div className=' absolute bottom-[2%] left[49%] '>
-			  <Button variant='contained' color='primary'
+		  <div className=' absolute top-[2%] left[49%] '>
+			  <Button  startIcon={<Download />} variant='contained' color='primary'
 				  onClick={downloadPrescriptionHandler}
 			  >
-				  Dowload Prescription
+				  Dowload File
 			  </Button>
 		  </div>
 
