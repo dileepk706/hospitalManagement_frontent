@@ -9,17 +9,27 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const doctorCredentials: any = localStorage.getItem('persist:doctor')
-    const doctorCredentialObject = JSON.parse(doctorCredentials)
-    const doctorToken = doctorCredentialObject?.accessToken.replace(/^"(.*)"$/, '$1');
+    // const doctorCredentials: any = localStorage.getItem('persist:doctor')
+    // const doctorCredentialObject = JSON.parse(doctorCredentials)
+    // const doctorToken = doctorCredentialObject?.accessToken.replace(/^"(.*)"$/, '$1');
+    const doctorToken=localStorage.getItem('doctortoken')
+    const adminToken=localStorage.getItem('admintoken')
+
+    
     const userCredentials: any = localStorage.getItem('persist:user')
     const userCredentialsObject = JSON.parse(userCredentials)
     const userToken = userCredentialsObject?.accessToken.replace(/^"(.*)"$/, '$1');
+    // const adminCredentials: any = localStorage.getItem('persist:admin')
+    // const adminCredentialsObject = JSON.parse(adminCredentials)
+    // const adminToken = adminCredentialsObject?.accessToken.replace(/^"(.*)"$/, '$1');
     if(userToken){
       config.headers['accessToken'] = `Bearer ${userToken}`;
     }
     if(doctorToken){
       config.headers['accessTokenDoctor'] = `Bearer ${doctorToken}`;
+    }
+    if(adminToken){
+      config.headers['accessTokenAdmin'] = `Bearer ${adminToken}`;
     }
 
 

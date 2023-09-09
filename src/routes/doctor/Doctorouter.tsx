@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import DoctorHome from '../../pages/doctor/DoctorHomePage';
 import DoctorProtected from './DoctorProtected';
-import LoginPage from '../../pages/doctor/LoginPage';
+import LoginPageDoctor from '../../pages/doctor/LoginPage';
 import { useAppSelector } from '../../redux/hooks';
 import Drawer from "../../components/doctor/sideBar/Sidebar";
 import AddSchedulePage from '../../pages/doctor/AddSchedule';
@@ -15,15 +15,15 @@ import DoctorDashboard from '../../pages/doctor/DoctorDashboard';
 interface applicationType  {}
                           
 const DoctorRouter:React.FC<applicationType>=()=> {
-  const doctorToken= useAppSelector(state=>state?.doctor?.accessToken)
+  const doctorToken=  localStorage.getItem('doctortoken')
   
 
   return (
     <>
       <Drawer />
       <Routes>
-        <Route path='/login' element={!doctorToken && <LoginPage />} />
-        <Route path='/' element={<DoctorProtected><DoctorHome /></DoctorProtected>} />
+        {/* <Route path='/login' element={!doctorToken && <LoginPage />} /> */}
+        <Route path='/' element={<DoctorProtected><DoctorDashboard /></DoctorProtected>} />
         <Route path='/add-schedule' element={<DoctorProtected><AddSchedulePage /></DoctorProtected>} />
         <Route path='/patients' element={<DoctorProtected><PatientListing /></DoctorProtected>} />
         <Route path='/patients/:userId' element={<DoctorProtected><SinglePatient /></DoctorProtected>} />

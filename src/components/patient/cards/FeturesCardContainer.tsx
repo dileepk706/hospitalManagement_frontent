@@ -61,9 +61,9 @@ const FeaturesCardContainer: React.FC<CardContainerProps> = () => {
             <h1 className='site-txt-color text-center font-bold text-xl  font-mono  mt-4 mb-1  md:mt-24 md:mb-3 md:text-2xl  '>Our Features and Services</h1>
 
             <motion.div
-            initial={{ y: 100,opacity:0.7 ,scale:0}} //animate the section when show on the screen 
+            initial={{ y: 100,opacity:0.7 ,scale:0.5}} //animate the section when show on the screen 
             whileInView={{ y: 0 ,opacity:1,scale:1}}
-            transition={{ duration: '1',ease:'easeInOut',}}
+            transition={{ duration: '0.6',ease:'easeInOut',}}
                 style={{
                     cursor: 'grab',
                     width: '100%',

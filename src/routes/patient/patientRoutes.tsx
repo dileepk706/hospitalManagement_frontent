@@ -11,6 +11,7 @@ import PaymentCancel from '../../pages/patient/PaymentCancelled';
 import AppointmentsPage from '../../pages/patient/AppointmentsPage';
 import ProfilePage from '../../pages/patient/ProfilePage';
 import VideoCall from '../../pages/patient/VideoCall';
+import Sidebar from '../../components/patient/sideBar/SideBar';
 
 
 interface applicationType  {}
@@ -21,10 +22,13 @@ const PatientRouter:React.FC<applicationType>=()=> {
   
   return (
     <>
+            <Sidebar />
+
      <Routes>
-        <Route path='/login' element={!userToken && <LoginPage />} />
+        {/* <Route path='/login' element={!userToken && <LoginPage />} /> */}
         <Route path='/' element={ <PatientHome />} />
         <Route path='/doctors' element={<ListDoctor />} />
+        <Route path='/doctors/consulted' element={<PatientProtected>< VideoCall/></PatientProtected>} />
         <Route path='/make-appointment/:id' element={ <BookDoctorSlot /> } /> 
         <Route path='/payment-success/:doctorId/:slotId/:fee' element={<PatientProtected><PaymentSuccess /></PatientProtected>} />
         <Route path='/payment-canceled' element={<PatientProtected><PaymentCancel /></PatientProtected>} />

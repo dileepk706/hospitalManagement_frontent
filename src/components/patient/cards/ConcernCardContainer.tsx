@@ -7,6 +7,7 @@ import bones from '../../../assets/images/download.png'
 import childrImg from '../../../assets/images/heart.png'
 import depressionImg from '../../../assets/images/brain.png'
 import dentalImg from '../../../assets/images/teeth.png'
+import AppointmentBookingModal from '../homeTopSection/AppointmentBookingModal';
 // import Typewriter from 'typewriter-effect'
 
 interface ConcernCardContainerProps { }
@@ -16,6 +17,7 @@ const ConcernCardContainer: React.FC<ConcernCardContainerProps> = () => {
     const [width, setWidth] = useState<number>(0)
     const carousal = useRef<HTMLDivElement>(null)
     const [isScrollingPaused, setScrollingPaused] = useState<boolean>(false);
+    const [AppntmtBkngModalView,setAppntmtBkngModalView]=useState(false)
 
     useEffect(() => {
         const scrollWidth = carousal.current?.scrollWidth ?? 0;
@@ -57,6 +59,7 @@ const ConcernCardContainer: React.FC<ConcernCardContainerProps> = () => {
 
 
     return (
+        <>
         <div className='mt-[10%] mb-[8%]'>
 
         <div className='flex space-x-1 flex-col'>
@@ -85,18 +88,21 @@ const ConcernCardContainer: React.FC<ConcernCardContainerProps> = () => {
                     dragConstraints={{ right: 0, left: -width }}
                     className='inner-carousal pt-2 pb-2 flex justify-evenly justify'
                 >
-                   <ConcernCard concern='Low bone density'img={bones} animatePropForPosY={120} timer='1'/>
-                   <ConcernCard concern='kidney problems'img={kidny} animatePropForPosY={100} timer='1.6'/>
-                   <ConcernCard concern='Heart problem'img={childrImg} animatePropForPosY={90} timer='1.9'/>
-                   <ConcernCard concern='Depression or anxiety'img={depressionImg} animatePropForPosY={80} timer='2.2'/>
-                   <ConcernCard concern='Dental or Teething troubles'img={dentalImg} animatePropForPosY={70}  timer='2.5'/>
+                   <ConcernCard  setAppntmtBkngModalView={setAppntmtBkngModalView} concern='Low bone density'img={bones} animatePropForPosY={120} timer='1'/>
+                   <ConcernCard setAppntmtBkngModalView={setAppntmtBkngModalView}  concern='kidney problems'img={kidny} animatePropForPosY={100} timer='1.6'/>
+                   <ConcernCard  setAppntmtBkngModalView={setAppntmtBkngModalView} concern='Heart problem'img={childrImg} animatePropForPosY={90} timer='1.9'/>
+                   <ConcernCard  setAppntmtBkngModalView={setAppntmtBkngModalView} concern='Depression or anxiety'img={depressionImg} animatePropForPosY={80} timer='2.2'/>
+                   <ConcernCard  setAppntmtBkngModalView={setAppntmtBkngModalView} concern='Dental or Teething troubles' img={dentalImg} animatePropForPosY={70}  timer='2.5'/>
                    
                 </motion.div>
             </motion.div>
         </div>
 
         </div>
-
+    {   
+    AppntmtBkngModalView&&<AppointmentBookingModal setAppntmtBkngModalView={setAppntmtBkngModalView}/>
+    }
+  </>
     );
 
 }

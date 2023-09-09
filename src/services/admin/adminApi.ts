@@ -2,10 +2,10 @@ import { api } from "../../api/axios";
 import { initialValuesType } from "../../components/admin/doctors/DoctorAddForm";
 import { DoctorType, Prescription, UserType } from "../../types/Models";
 
-export const getAppointments=async(filter?:string):Promise<any>=>{
+export const getAppointments=async(filter?:string,page?:number):Promise<any>=>{
     try {
     // let c='sort=consultingFee-1'
-        const res = await api.get(`/admin/appointments?status=${filter?filter:''}`)
+        const res = await api.get(`/admin/appointments?status=${filter?filter:''}&page=${page}`)
         const data = await res.data
         return data
     } catch (error:any) {
@@ -80,4 +80,12 @@ export const createDoctor=async(doctor:initialValuesType):Promise<any>=>{
     });
     const data = await res.data
     return data
+}
+export const adminLogin=async(email:string,password:string ):Promise<any>=>{
+    const res = await api.post(`/admin/login`,{
+        email,password 
+    })
+    const data = await res.data
+    return data
+
 }

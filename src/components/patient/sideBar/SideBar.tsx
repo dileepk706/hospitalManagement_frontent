@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import SearchBarAutocomplete from '../searchInputBar/SearchBar';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks';
-import { logoutPateint } from '../../../redux/patient/patientSlice';
+import logo from '../../../assets/images/logo.png'
 
  
 interface SidebarProps {}
@@ -27,11 +27,7 @@ const Sidebar: React.FC<SidebarProps> = () => {
    const [options, setOptions] = useState<optionType[]>([
       { sideBarItem: 'Home', isSelected: true,route:'/' },
       { sideBarItem: 'Profile', isSelected: false,route:'/profile'  },
-      { sideBarItem: 'Take an appointment', isSelected: false,route:'/book-slot'  },
       { sideBarItem: 'Appointments', isSelected: false ,route:'/appointments/all' },
-      // { sideBarItem: 'Reports', isSelected: false,route:'/'  },
-      // { sideBarItem: 'Your consultants', isSelected: false,route:'/'  },
-      { sideBarItem: 'Chat with Dr', isSelected: false,route:'/chat'  }
    ])
 
    
@@ -93,13 +89,25 @@ const Sidebar: React.FC<SidebarProps> = () => {
                <Button onClick={toggleDrawer('left', true)}><Menu /></Button>
                <SearchBarAutocomplete />
             </Box> */}
+
+               <div className='w-[50px] '>
+                  <img className='w-full' src={logo} alt="" />
+               </div>
                <SearchBarAutocomplete />
 
                <Box sx={{display:'flex',justifyContent:'space-evenly',alignItems:'center',gap:'20px'}}>
                   
-                  <Link to={'/'}>Home</Link>
-                  <Link to={'/book-slot'}>Make appointment</Link>
-                  <Link to={'/appointments/all'}>Appointments</Link>
+                  {
+                     options.map(e=>(
+                        <p 
+                        onClick={()=> changeIsSelected(e.sideBarItem)}
+                        className={` font-bold text-lg ${e.isSelected?` txt-them`:`text-gray-800`}`} >
+
+                           <Link to={`${e.route}`}>{e.sideBarItem}</Link>
+                        </p>
+                     ))
+                  }
+                  
 
                </Box>
 

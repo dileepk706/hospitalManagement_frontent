@@ -4,7 +4,7 @@ import Login from '../../components/doctor/login/Login';
 type AdminLoginPageProps={
 
 }
-const LoginPage:React.FC<AdminLoginPageProps>=()=> {
+const LoginPageDoctor:React.FC<AdminLoginPageProps>=()=> {
     return (
       <>
       <Login/>
@@ -12,4 +12,4 @@ const LoginPage:React.FC<AdminLoginPageProps>=()=> {
     );
   }
   
- export default LoginPage
+ export default LoginPageDoctor

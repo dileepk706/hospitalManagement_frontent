@@ -1,9 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit'
+import { persistReducer, persistStore } from 'redux-persist';
 import doctorsDataReducer from './patient/doctorsDataSlicer'
 import doctorSearchParamsReducer from './patient/doctorSearchParams'
-import doctorReducer from './doctor/doctorSlice'
-import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import doctorReducer from './doctor/doctorSlice'
+import adminReducer from './admin/adminSlice'
 import pateintReducer from './patient/patientSlice'
 import paymentReducer from './patient/paymentSlicer'
 
@@ -15,9 +16,13 @@ const doctorPersistConfig  = {
     key: 'doctor',
     storage,
 }
-
+const adminPersistConfig  = {
+    key: 'admin',
+    storage,
+}
 const persistedUserReducer = persistReducer(userPersistConfig, pateintReducer)
 const presistDoctorReducer=persistReducer(doctorPersistConfig,doctorReducer)
+const presistAdminReducer=persistReducer(adminPersistConfig,adminReducer)
 
 export const store=configureStore({
     reducer:{
@@ -25,6 +30,7 @@ export const store=configureStore({
         searchParameteres:doctorSearchParamsReducer,
         user:persistedUserReducer,
         doctor:presistDoctorReducer,
+        admin:presistAdminReducer,
         payment:paymentReducer
     }
 })

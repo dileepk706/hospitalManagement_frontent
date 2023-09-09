@@ -65,7 +65,7 @@ const ProfileWrapper= () => {
             />
           </div>
           <div className='flex-grow'>
-            <label className='block text-gray-600 mb-1'>Name</label>
+            <label className='block text-gray-600 mb-1 font-bold '>Name</label>
             <div className='bg-gray-100 p-2 rounded'>
               <h4 className='text-gray-800'>{user?.name}</h4>
             </div>
@@ -73,7 +73,7 @@ const ProfileWrapper= () => {
          {
           user?.wallet&&(
             <div className='flex-grow px-10 '>
-            <label className='block text-gray-600 mb-1'>Wallet Amount</label>
+            <label className='block text-gray-600 mb-1 font-bold '>Wallet Amount</label>
             <div className='bg-gray-100 p-2 rounded'>
               <h4 className='text-green-800 font-bold'>₹ {user?.wallet}</h4>
             </div>
@@ -86,13 +86,13 @@ const ProfileWrapper= () => {
         <div className='flex flex-col mb-6'>
           <div className='flex items-start mb-2'>
             <div className='w-1/2 pr-2'>
-              <p className='text-gray-600'>Phone number</p>
+              <p className='text-gray-600 font-bold '>Phone number</p>
               <div className='bg-gray-100 p-2 rounded'>
                 <h5 className='text-gray-800'>{user?.phone}</h5>
               </div>
             </div>
             <div className='w-1/2 pl-2'>
-              <p className='text-gray-600'>Email address</p>
+              <p className='text-gray-600 font-bold '>Email address</p>
               <div className='bg-gray-100 p-2 rounded'>
                 <h5 className='text-gray-800'>{user?.email}</h5>
               </div>
@@ -100,13 +100,13 @@ const ProfileWrapper= () => {
           </div>
           <div className='flex items-start'>
             <div className='w-1/2 pr-2'>
-              <p className='text-gray-600'>Age</p>
+              <p className='text-gray-600 font-bold '>Age</p>
               <div className='bg-gray-100 p-2 rounded'>
                 <h5 className='text-gray-800'>{user?.dob}</h5>
               </div>
             </div>
             <div className='w-1/2 pl-2'>
-              <p className='text-gray-600'>Gender</p>
+              <p className='text-gray-600 font-bold '>Gender</p>
               <div className='bg-gray-100 p-2 rounded'>
                 <h5 className='text-gray-800'>{user?.sex}</h5>
               </div>

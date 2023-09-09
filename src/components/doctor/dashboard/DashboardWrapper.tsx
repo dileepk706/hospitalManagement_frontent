@@ -63,16 +63,19 @@ function DashboardWrapper() {
 
         ],
     backgroundColor: [
-      'rgb(181, 10, 233)',
-      'rgb(247, 12, 106)',
+      'rgb(122, 0, 47)',
+      'rgb(83, 12, 247)',
+      'rgb(12, 163, 7)',
+      'rgb(247, 184, 12)',
+
     ],
     borderColor: [
-      'rgb(181, 10, 233)',
-      'rgb(247, 12, 106)',
     ],
     borderWidth: 2,
   }
-
+  const dailyRevenue=dashsBoardata?.revenueOfSingleDays.map(e=>{
+    return e.totalConsultingFee
+  })
   const barChartDataSet = {
     label: `${dashsBoardata?.totalRevenue || '0'}`,
     data: dailyRevenue || [0],
@@ -80,7 +83,7 @@ function DashboardWrapper() {
     borderColor: 'rgba(255, 99, 132, 1)',
     borderWidth: 1,
   }
-  const barChartLabel=dashsBoardata?.revenue.map(e=>{
+  const barChartLabel=dashsBoardata?.revenueOfSingleDays.map(e=>{
     const dateObj = new Date(e._id);
     const formattedDate = dateObj.toLocaleDateString('en-US', {
       year: 'numeric',

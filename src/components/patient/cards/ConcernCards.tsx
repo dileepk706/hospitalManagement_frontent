@@ -7,8 +7,9 @@ type ConcernCardProps = {
     img:string;
     animatePropForPosY:number;
     timer:string
+    setAppntmtBkngModalView: React.Dispatch<React.SetStateAction<boolean>>
 }
-const ConcernCard: React.FC<ConcernCardProps> = ({concern,img,animatePropForPosY,timer}) => {
+const ConcernCard: React.FC<ConcernCardProps> = ({concern,img,animatePropForPosY,timer,setAppntmtBkngModalView}) => {
 
     return (
         <motion.div  
@@ -28,6 +29,7 @@ const ConcernCard: React.FC<ConcernCardProps> = ({concern,img,animatePropForPosY
                 {concern}
             </p>
             <button
+            onClick={()=>setAppntmtBkngModalView(true)}
                 className="block mt-1 site-txt-color w-full select-none rounded-lg bg-blue-gray-900/10 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-blue-gray-900 transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 type="button">
                 CONSULT NOW

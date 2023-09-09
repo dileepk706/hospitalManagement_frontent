@@ -48,7 +48,7 @@ const AppointmentsWrapper = () => {
                         </div>
                         <div className='grid grid-cols-2 gap-4'>
                         {appointmens?.map(appointment => (
-                            <div className='col-span-1  flex   justify-between border p-4 py-6 gap-3 rounded-md shadow-md bg-white mb-2'>
+                            <div className={` ${appointment.status !=='notConsulted'?'bg-gray-200':'bg-white' } col-span-1  flex   justify-between border p-4 py-6 gap-3 rounded-md shadow-md  mb-2`}>
                                 <div className='flex flex-col'>
                                     <h1 className='text-xl font-semibold'>Dr. {appointment.doctor.name}</h1>
                                     <h4 className='text-gray-500'>{appointment.scheduledAt.slot_date}</h4>
@@ -62,13 +62,13 @@ const AppointmentsWrapper = () => {
                                 <div className='flex justify-center items-center space-x-3'>
                                     <button
 
-                                        className='px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600'>
-                                        <Link to={`/make-appointment/${appointment.doctor._id}`}>Book again</Link>
+                                    className='px-2 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400'>
+                                        <Link to={`/make-appointment/${appointment.doctor._id}`}>View Doctor</Link>
                                     </button>
                                     <button
                                         onClick={() => singleAppointmentHelper(appointment?._id)}
-                                        className='px-2 py-1 bg-gray-300 text-gray-700 rounded hover:bg-gray-400'>
-                                        View Details
+                                        className='px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600'>
+                                        {appointment.status==='notConsulted'?'Consult Doctor':'View Details'}
                                     </button>
                                 </div>
                             </div>

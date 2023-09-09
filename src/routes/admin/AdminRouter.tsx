@@ -10,22 +10,27 @@ import DoctorListPage from '../../pages/admin/DoctorListPage';
 import DoctorProfilePage from '../../pages/admin/DoctorProfilePage';
 import AdminDashboard from '../../pages/admin/AdminDashboard';
 import AddDoctorPage from '../../pages/admin/AddDoctorPage';
+import { useAppSelector } from '../../redux/hooks';
+import LoginPageAdmin from '../../pages/admin/LoginPageAdmin';
 
 interface applicationType  {}
                           
 const AdminRouter:React.FC<applicationType>=()=> {
+  const adminToken = localStorage.getItem('admintoken')
+
 
   return (
     <>
       <Drawer isAdmin={true} />
       <Routes>
-        <Route path='/' element={<AdminProtected><AdminHome /></AdminProtected>} />
+        {/* <Route path='/login' element={ !adminToken&& <LoginPageAdmin />} /> */}
+
+        <Route path='/' element={<AdminProtected><AdminDashboard /></AdminProtected>} />
         <Route path='/appointments' element={<AdminProtected><AppointmentListPage /></AdminProtected>} />
         <Route path='/patients/:userId' element={<AdminProtected><SinglePatient /></AdminProtected>} />
         <Route path='/patients' element={<AdminProtected><PatientsWraper /></AdminProtected>} />
         <Route path='/doctors' element={<AdminProtected><DoctorListPage /></AdminProtected>} />
         <Route path='/doctors/:id' element={<AdminProtected><DoctorProfilePage /></AdminProtected>} />
-        <Route path='/dashboard' element={<AdminProtected><AdminDashboard /></AdminProtected>} />
         <Route path='/add-doctors' element={<AdminProtected><AddDoctorPage /></AdminProtected>} />
 
         

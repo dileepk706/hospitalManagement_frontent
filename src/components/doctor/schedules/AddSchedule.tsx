@@ -16,6 +16,8 @@ const AddSchedule: React.FC<AddScheduleProps> = () => {
     const [endingTime, setEndingTime] = useState<string | null>(null);
     const [timeDuration, setTimeDuration] = useState<number>(15);
     const [apiError,setApiError]=useState<string>('')
+    const [apiMessage,setApiMessage]=useState<string>('')
+
 
     const handleTimeDurationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedValue = parseInt(event.target.value, 10);
@@ -29,9 +31,10 @@ const AddSchedule: React.FC<AddScheduleProps> = () => {
     const CreateSloteHelper=async()=>{
         try {
             setApiError('')
+            setApiMessage('')
             const createdSlote = await CreateSlote(startingTime,endingTime,timeDuration,selectedDate)
             console.log(createdSlote);
-            
+            setApiMessage('Slotes created Succussfully')
         } catch (error:any) {
             checkDocterAuth(error)
             setApiError(error?.response?.data?.message)
@@ -54,11 +57,11 @@ const AddSchedule: React.FC<AddScheduleProps> = () => {
                     <h4 className='text-lg font-medium font-mono'>
                         ADD SCHEDULE
                     </h4>
-                    <Link to={'/doctor/shcedules'}>
+                    {/* <Link to={'/doctor/shcedules'}>
                         <p className='txt-them '>
                             Schedule List
                         </p>
-                    </Link>
+                    </Link> */}
                 </div>
 
                 <hr className='w-full ' />
@@ -66,6 +69,9 @@ const AddSchedule: React.FC<AddScheduleProps> = () => {
                 <div className='flex items-center w-full my-3'>
                     <p className='text-center text-red-700'>
                         {apiError&&apiError}
+                    </p>
+                    <p className='text-center my-3 text-green-700'>
+                        {apiMessage&&apiMessage}
                     </p>
                 </div>
 

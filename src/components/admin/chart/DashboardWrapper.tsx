@@ -34,6 +34,8 @@ export type revenue= {
 }
 function DashboardWrapper() {
 
+  const t=localStorage.getItem('persist:admin')
+  console.log('accessToken : ',t)
   const [dashsBoardata, setDahBaordData] = useState<DashsBoardAllData | null>(null)
 
   useEffect(() => {

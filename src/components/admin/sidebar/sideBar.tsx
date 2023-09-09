@@ -71,7 +71,7 @@ const Drawer:React.FC<drawerProp> = ({isAdmin}) => {
         <div className="py-4 overflow-y-auto">
           <ul className="space-y-2 font-medium">
 
-          <SideBarList titleName='Dashboard' path='dashboard'/>
+          <SideBarList titleName='Dashboard' path=''/>
           {/* <SideBarList titleName='Profile' path='profile'/> */}
           <SideBarList titleName='Appointmets' path='appointments'/>
           <SideBarList titleName='Pateints' path='patients'/>

@@ -28,7 +28,7 @@ const DepartmentCardContainer: React.FC<DepartmentCardContainerProps> = () => {
     const handleMouseUp = () => setScrollingPaused(false);
 
     return (
-        <div className='grid grid-cols-1 gap-4 mb-[8%] mt-[4%] md:grid-cols-3'>
+        <div className='grid grid-cols-1 gap-4 my-[14%] md:grid-cols-3'>
             <div className=' col-span-1 flex flex-col md:col-span-1'>
                 <motion.h1
                     initial={{ x: -200 }} //animate the section when show on the screen 
@@ -44,8 +44,7 @@ const DepartmentCardContainer: React.FC<DepartmentCardContainerProps> = () => {
                     transition={{ duration: '1.3', ease: 'easeOut', }}
                     exit={{ x: 0 }}
                     className='text-sm hidden font-mono text-gray-500 text-start md:text-sm md:block'>
-                    Private online consultations with verified doctors in all specialists,Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam obcaecati fugiat quidem nisi id libero dolorum deleniti.
-                    Private online consultations with verified doctors in all specialists,Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam obcaecati fugiat quidem nisi id libero dolorum deleniti.
+                    Private online consultations with verified doctors in all specialists  Each department is staffed with healthcare professionals who are trained and experienced in diagnosing, treating, and managing particular types of medical conditions or body systems. These departments work together to provide comprehensive healthcare services to patients, addressing a wide range of medical needs and conditions
                 </motion.p>
             </div>
             <motion.div
@@ -71,13 +70,35 @@ const DepartmentCardContainer: React.FC<DepartmentCardContainerProps> = () => {
                     drag='x'
                     dragConstraints={{ right: 0, left: -750 }}
                     className='inner-carousal pt-2 pb-2'>
-
-                    <CardComponent image='https://www.practostatic.com/consumer-home/desktop/images/1558283618/sp-dentist@2x.jpg' link='/demo' title='Instant Video cosultation' />
-                    <CardComponent image={womenDocImg} link='/demo' title='Genaral department' />
-                    <CardComponent image={prescriptDocImg} link='/demo' title='Genaral department' />
-                    <CardComponent image={repoptDocImg} link='/demo' title='Genaral department' />
-                    <CardComponent image={flDocImg} link='/demo' title='Genaral department' />
-                    <CardComponent image={healthDocImg} link='/demo' title='Genaral department' />
+                    
+                    <CardComponent image='https://media.istockphoto.com/id/1295301481/photo/modern-empty-temporary-intensive-care-emergency-room-is-ready-to-receive-patients-with.jpg?s=612x612&w=0&k=20&c=JS084TTZ4l5cmquQhncNlkUaiohHt762HnopGkpYwgA=' 
+                    title='Genaral department' 
+                    discription='The hospitals general department offers basic medical'
+                    />
+                    <CardComponent image='https://www.practostatic.com/consumer-home/desktop/images/1558283618/sp-dentist@2x.jpg' 
+                    title='Dentist' 
+                    discription='Dentists specialize in oral health'
+                    />
+                    <CardComponent 
+                    image='https://cdn.pixabay.com/photo/2015/07/10/21/00/hospital-840135_640.jpg'
+                    title='Mental Health Department  '
+                    discription='The mental health department focuses on diagnosing and treating mental and emotional disorders'
+                     />
+                    <CardComponent
+                     image='https://cdn.pixabay.com/photo/2014/12/10/20/48/laboratory-563423_640.jpg'
+                    title='ENT (Ear, Nose, and Throat)'
+                    discription='Disorders related to the ear, nose, and throat, addressing issues like hearing problems'
+                     />
+                    <CardComponent 
+                    image='https://media.istockphoto.com/id/1321691559/photo/friendly-nurse-wearing-face-mask-talks-to-beautiful-senior-female-patient-resting-in-bed.jpg?s=612x612&w=0&k=20&c=rgsQdIlPKpLRJDuJkOWgEOJfd1EVJ7a4J-StxlwoVOI='
+                    title='Urology Department'
+                    discription='The urology department deals with urinary tract and reproductive system conditions'
+                     />
+                    <CardComponent 
+                    image='https://media.istockphoto.com/id/1038799988/photo/recovering-little-child-lying-in-the-hospital-bed-sleeping-mother-holds-her-hand-comforting.jpg?s=612x612&w=0&k=20&c=NdyrMOmg3Jlg5FucAwgMPYzxtbOtEonxFYHUvDiyrkE='
+                    title='Cardiology Department'
+                    discription=' The cardiology department is dedicated to heart health'
+                     />
 
                 </motion.div>
                 <div className='flex justify-center items-center gap-1'>

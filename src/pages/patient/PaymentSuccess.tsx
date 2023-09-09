@@ -29,7 +29,7 @@ function PaymentSuccess() {
         }
     }
   return (
-      <div className="bg-gray-100 h-screen items-center justify-center">
+      <div className="bg-gray-100 h-screen items-center justify-center relative z-[999] top-0 ">
           <div className="bg-white h-full mt-[10%] p-6 md:mx-auto">
               <svg viewBox="0 0 24 24" className="text-green-600 w-16 h-16 mx-auto my-6">
                   <path

@@ -6,9 +6,11 @@ import { userLogin } from '../../../services/patients/patientLogin';
 import { useAppDispatch } from '../../../redux/hooks';
 import { updateUserCredentials } from '../../../redux/patient/patientSlice';
 import { useNavigate } from 'react-router-dom';
-import SignupButton from './SignupButton';  
+import SignupButton from '../../doctor/login/SignupButton';  
 import { DoctorLogin } from '../../../services/doctor/doctorLogin';
 import { updateDoctorCredentials } from '../../../redux/doctor/doctorSlice';
+import { adminLogin } from '../../../services/admin/adminApi';
+import { updateAdminCredentials } from '../../../redux/admin/adminSlice';
 
 interface LoginProps {
 }
@@ -23,7 +25,7 @@ const initialValues: initialValuesType = {
 }
 
 
-const Login:React.FC<LoginProps> = () => {
+const LoginWrapper:React.FC<LoginProps> = () => {
  
   const dispatch=useAppDispatch()
   const navigate=useNavigate()
@@ -35,15 +37,17 @@ const Login:React.FC<LoginProps> = () => {
     initialValues: initialValues,
     validationSchema: loginSchema,
     onSubmit: (values) => {
+        console.log({values})
       setLoading(true)
       const userLoginHelper=async()=>{
         try {
-          const Doctor = await DoctorLogin(values.email, values.password)
-          if(Doctor){
-            const {accessToken,user: doctor}=Doctor
-            localStorage.setItem('doctortoken',accessToken)
-            dispatch(updateDoctorCredentials({accessToken:accessToken,doctorImage:doctor?.image?doctor.image:'',doctorName:doctor?.name}))
-            navigate('/doctor')
+          const Admin = await adminLogin(values.email, values.password)
+          console.log(Admin)
+          if(Admin){
+            const {accessToken,admin}=Admin
+            localStorage.setItem('admintoken',accessToken)
+            dispatch(updateAdminCredentials({accessToken:accessToken,adminImage:admin?.image?admin.image:'',adminName:admin?.name}))
+            navigate('/admin')
         }
         } catch (error:any) {
           error?.response?.data?.message && setApiError(error?.response?.data?.message)
@@ -71,7 +75,7 @@ const Login:React.FC<LoginProps> = () => {
   
         {/* Right column container */}
         <div className="mb-12 md:mb-0 md:w-8/12 md:px-[70px] lg:w-5/12 xl:w-5/12">
-        <p className="mb-3 mr-4 text-lg    ">Login as Doctor</p>
+        <p className="mb-3 mr-4 text-lg    ">Login as Admin</p>
 
           <form onSubmit={handleSubmit}>
             {/* login with socialmedia */}
@@ -89,9 +93,8 @@ const Login:React.FC<LoginProps> = () => {
                     onBlur={handleBlur}
                     placeholder='Email address' className='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white  ' />
                   {errors.email && touched.email && <p className='text-red-600 text-sm '>{errors.email}</p>}
-                  {apiError==='Doctor is not exist' &&   <p className='text-red-600 text-sm '>{apiError}</p>}
-                  {apiError==='Doctor is blocked by admin' && (
-                  <p className='text-red-600 text-sm '>{apiError}</p>)}
+                    <p className='text-red-600 text-sm '>{apiError}</p>
+                  
 
                
                 </div>
@@ -130,4 +133,4 @@ const Login:React.FC<LoginProps> = () => {
   );
 };
 
-export default Login;
+export default LoginWrapper;

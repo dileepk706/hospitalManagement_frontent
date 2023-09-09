@@ -15,7 +15,7 @@ const CardComponent: React.FC<CardComponentProps> = ({ image, title, discription
             <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2">{title}</div>
                 <p className="text-gray-700 text-base">
-                    Lorem ipsum dolor sit amet, consectetur
+                    {discription}
                 </p>
             </div>
         </div>

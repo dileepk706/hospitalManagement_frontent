@@ -7,7 +7,7 @@ interface DoctorProtectedRouteProps {
 }
 
 const DoctorProtected: React.FC<DoctorProtectedRouteProps> = ({ children }) => {
-  const doctorToken = useAppSelector(state=>state.doctor.accessToken)
+  const doctorToken = localStorage.getItem('doctortoken')
 
 
   if (doctorToken) { // You can use the boolean value directly for the condition

@@ -122,19 +122,19 @@ const Drawer = () => {
                     </Link>
                   </p>
                 </li>
-                <li>
+                {/* <li>
                   <p
                     className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
                   >
                     List schedule
                   </p>
-                </li>
+                </li> */}
                 
               </ul>
             </li>
            
            
-            <SideBarList titleName='Feedback' path='feedback'/>
+            {/* <SideBarList titleName='Feedback' path='feedback'/> */}
 
 
 

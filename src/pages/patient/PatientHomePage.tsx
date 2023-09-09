@@ -15,7 +15,6 @@ const UserHome = () => {
   return (
     <>
       <motion.div style={{scaleX: scrollYProgress,position: 'fixed',top: 0,right: 0,left: 0,height: 10,background: '#0095ff',transformOrigin: '0%',zIndex: 999}}></motion.div>
-      <Sidebar />
       <div className='container mx-auto py-5'>
         
         <HomeTopSection />
@@ -23,7 +22,11 @@ const UserHome = () => {
         <ConcernCardContainer />
         <DepartmentCardContainer/>
         <ArticleSection/>
-        
+        <footer className="footer footer-center p-7 them text-base-content">
+          <aside>
+            <p>Copyright © 2023 - All right reserved by Dileep K </p>
+          </aside>
+        </footer>
       </div>
     </>
   );
