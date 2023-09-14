@@ -1,28 +1,32 @@
 
 
-// import React, { createContext, useState, useRef, useEffect } from 'react';
 import React, { createContext, useMemo, useContext } from "react";
-
 import { io } from 'socket.io-client';
-import Peer from 'simple-peer';
+
+interface SocketProviderProps {
+  children: React.ReactNode;
+}
+
+
+// export const useSocket = () => {
+//   const socket = useContext(SocketContext);
+//   return socket;
+// };
+
+const ENDPOINT = 'https://shopsmart.cloud'
 
 const SocketContext = createContext<any>(null);
 
 export const useSocket = () => {
-  const socket = useContext(SocketContext);
+  const socket = io(ENDPOINT)
   return socket;
 };
 
-
-interface SocketProviderProps {
-    children: React.ReactNode;
-  }
-  
-
 // const socket = io('http://localhost:5000');
 
+
 const ContextProvider:React.FC<SocketProviderProps> = ({ children }) => {
-  const socket = useMemo(() => io("https://shopsmart.cloud"), []);
+  const socket = useMemo(() => io(ENDPOINT), []);
 
   return (
     <SocketContext.Provider value={socket}>
