@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import LoginWithGoogle from '../loginSocialMedia/LoginWithGoogle';
-import LoginWithFaceBook from '../loginSocialMedia/LoginWithFaceBook';
 
 const LoginWithSocialMediaWrapper = () => {
 
@@ -16,14 +15,7 @@ const LoginWithSocialMediaWrapper = () => {
                     <LoginWithGoogle />
                 </motion.div>
 
-                <motion.div
-                    initial={{ x: 500 }}
-                    animate={{ x: 0 }}
-                    transition={{ delay: 0.4, duration: 1 }}
-                >
-                    <LoginWithFaceBook />
-
-                </motion.div>
+                
 
             </div>
             <div

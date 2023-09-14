@@ -29,11 +29,11 @@ const App:React.FC<applicationType>=()=> {
         <Route path='/*' element={ <PatientRouter />} />
         <Route path='/doctor/*' element={<DoctorRouter />} />
         <Route path='/admin/*' element={ <AdminRouter />} />
-        <Route path='/login' element={!userToken && <LoginPageDoctor />} />
+        <Route path='/login' element={!userToken && <LoginPage />} />
         <Route path='/doctor/login' element={!doctorToken && <LoginPageDoctor />} />
         <Route path='/admin/login' element={!adminToken && <LoginPageAdmin />} />
   
-    
+
       </Routes>
     </Router>
       
