@@ -86,7 +86,7 @@ type props={
     console.log('socket clicked')
     console.log(socket)
 
-    socket.emit("room:join", { email: user?.userName, room: appointment?._id });
+    socket.emit("room:join",{ email: user?.userName, room: appointment?._id });
   }, [socket]);
 
   const handleJoinRoom = useCallback(
