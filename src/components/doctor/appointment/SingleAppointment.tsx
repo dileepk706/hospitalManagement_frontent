@@ -31,7 +31,7 @@ const SingleAppointment: React.FC<SingleAppointmentProps> = ({ singleAppointment
       const { email, room } = data;
       console.log('data from backend', email, room)
 
-      navigate(`/call/doctor/${room}/${appointment?.doctor._id}/${appointment?.user._id}`);
+      navigate(`/doctor/call/doctor/${room}/${appointment?.doctor._id}/${appointment?.user._id}`);
     },
     [navigate]
   );
