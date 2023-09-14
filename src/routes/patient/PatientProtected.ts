@@ -7,7 +7,7 @@ interface patientProtectedProps {
 }
 
 const PatientProtected: React.FC<patientProtectedProps> = ({ children }) => {
-  const userToken = useAppSelector(state=>state.user.accessToken)
+  const userToken = localStorage.getItem('usertoken')
   
   if (userToken) {// You can use the boolean value directly for the condition
     return children;

@@ -42,7 +42,7 @@ const Login:React.FC<LoginProps> = ({setIsLoginComponent} ) => {
           const User = await userLogin(values.email, values.password)
           if(User){
             const {accessToken,user}=User
-            
+            localStorage.setItem('usertoken',accessToken)
             dispatch(updateUserCredentials({accessToken:accessToken,
               userImage:user?.image?user.image:'',
               userName:user?.name,

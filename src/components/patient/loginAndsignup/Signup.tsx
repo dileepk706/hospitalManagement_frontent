@@ -44,6 +44,7 @@ const Signup: React.FC<SignupProps> = ({ setIsLoginComponent }) => {
           const User=await userSignup(values.email,values.name,values.password)
           if(User){
               const {accessToken,user}=User
+              localStorage.setItem('usertoken',accessToken)
               dispatch(updateUserCredentials({accessToken:accessToken,userImage:user?.image?user.image:'',userName:user?.name}))
               const bookingUrl=localStorage.getItem('bookingUrl')
               if(bookingUrl){

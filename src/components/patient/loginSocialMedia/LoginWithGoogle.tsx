@@ -38,7 +38,7 @@ const LoginWithGoogle=()=>{
           const User = await loginWithGoogle(res?.data?.email, res?.data?.name, res?.data?.picture);
           if(User){
             const {accessToken,user}=User
-               
+            localStorage.setItem('usertoken',accessToken)
             dispatch(updateUserCredentials({accessToken:accessToken,userImage:user?.image?user.image:'',userName:user?.name}))
             const bookingUrl=localStorage.getItem('bookingUrl')
             if(bookingUrl){

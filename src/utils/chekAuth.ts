@@ -10,7 +10,9 @@ export const checkUserAuth=(error:any)=>{
     if (error?.response?.status === 401 || error?.response?.status === 403) {
         console.log(error);
         
-        localStorage.removeItem('persist:user')
+        // localStorage.removeItem('persist:user')
+        
+        localStorage.removeItem('usertoken')
         window.location.href = '/login';
     }
 }

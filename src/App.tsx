@@ -16,7 +16,7 @@ interface applicationType  {}
 
 const App:React.FC<applicationType>=()=> {
   
-  const userToken= useAppSelector(state=>state?.user?.accessToken)
+  const userToken= localStorage.getItem('usertoken')
   const doctorToken=  localStorage.getItem('doctortoken')
   const adminToken = localStorage.getItem('admintoken')
 
