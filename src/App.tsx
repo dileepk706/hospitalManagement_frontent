@@ -33,7 +33,7 @@ const App:React.FC<applicationType>=()=> {
         <Route path='/doctor/login' element={!doctorToken && <LoginPageDoctor />} />
         <Route path='/admin/login' element={!adminToken && <LoginPageAdmin />} />
   
-
+    
       </Routes>
     </Router>
       
