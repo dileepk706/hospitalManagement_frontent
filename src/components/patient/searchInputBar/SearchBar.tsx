@@ -30,7 +30,9 @@ const SearchBarAutocomplete: React.FC = () => {
     }
     getAllDoctorDepatmentHealthNames()
   }, [])
+  console.log('setDoctor_department_health_names',setDoctor_department_health_names)
 
+  console.log('doctor_department_health_names',doctor_department_health_names)
   const handleChange = async (value: string) => { //change the input value
     setInput(value);
     const filteredData = doctor_department_health_names?.filter((e: any) => {

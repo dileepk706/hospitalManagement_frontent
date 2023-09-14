@@ -84,12 +84,12 @@ const FeaturesCardContainer: React.FC<CardContainerProps> = () => {
                     dragConstraints={{ right: 0, left: -width }}
                     className='inner-carousal pt-2 pb-2'>
 
-                    <CardComponent image={youngDocimg} link='/demo' title='Instant Video cosultation' />
-                    <CardComponent image={womenDocImg} link='/demo' title='Chat with Dr' />
-                    <CardComponent image={prescriptDocImg} link='/demo' title='Digital Prescription' />
-                    <CardComponent image={repoptDocImg} link='/demo' title='Degital Health Reports' />
-                    <CardComponent image={flDocImg} link='/demo' title='Submit Health Reports' />
-                    <CardComponent image={healthDocImg} link='/demo' title='Daily health feeds' />
+                    <CardComponent image={youngDocimg}  title='Instant Video cosultation' />
+                    <CardComponent image={womenDocImg}  title='Chat with Dr' />
+                    <CardComponent image={prescriptDocImg}  title='Digital Prescription' />
+                    <CardComponent image={repoptDocImg}  title='Degital Health Reports' />
+                    <CardComponent image={flDocImg}  title='Submit Health Reports' />
+                    <CardComponent image={healthDocImg}  title='Daily health feeds' />
 
                 </motion.div>
             </motion.div>

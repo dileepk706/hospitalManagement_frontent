@@ -8,7 +8,7 @@ import StepLabel from '@mui/material/StepLabel';
 import VideoLabelIcon from '@mui/icons-material/VideoLabel';
 import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 import { StepIconProps } from '@mui/material/StepIcon';
-import { AdsClick, Medication, Search } from '@mui/icons-material';
+import { AdsClick, Medication,BookOnline, Search,Article } from '@mui/icons-material';
 
 const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -65,7 +65,10 @@ function ColorlibStepIcon(props: StepIconProps) {
         1: <AdsClick />,
         2: <Search />,
         3: <Medication />,
-        4: <VideoLabelIcon />,
+        4:<BookOnline/>,
+        5: <VideoLabelIcon />,
+        6: < Article/>,
+
     };
 
     return (
@@ -75,7 +78,7 @@ function ColorlibStepIcon(props: StepIconProps) {
     );
 }
 
-const steps = ['Click Appointment button ', 'Tell what is your problem', 'Select a suitable doctor for you', 'Make an appointment'];
+const steps = ['Click Appointment button ', 'Tell what is your health concern', 'Select a suitable doctor for you', 'Make an appointment','Take consultaion at the scheduled time','Download prescription'];
 
 export default function ArticleSection() {
     return (
@@ -89,7 +92,7 @@ export default function ArticleSection() {
 
                     <Stack sx={{ width: '100%' }} spacing={4}>
 
-                        <Stepper alternativeLabel activeStep={3} connector={<ColorlibConnector />}>
+                        <Stepper alternativeLabel activeStep={5} connector={<ColorlibConnector />}>
                             {steps.map((label) => (
                                 <Step key={label}>
                                     <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>

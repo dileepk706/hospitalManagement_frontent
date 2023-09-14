@@ -22,7 +22,7 @@ interface SocketProviderProps {
 // const socket = io('http://localhost:5000');
 
 const ContextProvider:React.FC<SocketProviderProps> = ({ children }) => {
-  const socket = useMemo(() => io("localhost:5000"), []);
+  const socket = useMemo(() => io("https://shopsmart.cloud/api"), []);
 
   return (
     <SocketContext.Provider value={socket}>

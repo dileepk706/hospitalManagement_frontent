@@ -32,10 +32,10 @@ const  DoctorDeatails:React.FC<DoctorDeatailsProps>=({doctor,rating})=> {
           <p className='fontstyles text-sm text-gray-950 font-thin subpixel-antialiased mt-[3px]'>{doctor?.department?.departmentName}</p>
           <p className='fontstyles text-sm text-gray-950 font-thin subpixel-antialiased mt-[3px]'>{doctor?.yearOfExperiance} year of experiance </p>
 
-          <div className='flex flex-col justify-end pl-[26px]'>
+          {/* <div className='flex flex-col justify-end pl-[26px]'> */}
             <p className='fontstyles  text-sm text-green-700 font-thin subpixel-antialiased mt-[4px] '>Medical registration verrified </p>
             <Rating name="read-only" value={ rating} readOnly />
-          </div>
+          {/* </div> */}
 
           <div className={`w-full h-[30%] ${showMoreDscrptin} relative pr-[5%]`}>
             <p className='text-start fontstyles text-[10px] text-gray-950 font-thin subpixel-antialiased mt-[6px]'> {doctor?.biography}.</p>

@@ -19,7 +19,7 @@ interface initialValuesType {
 }
 
 const initialValues: initialValuesType = {
-  email: 'megha@gmail.com',
+  email: 'dlpkmr706@gmail.com',
   password: '1234567'
 }
 
