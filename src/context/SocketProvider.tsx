@@ -8,17 +8,21 @@ interface SocketProviderProps {
 }
 
 
-// export const useSocket = () => {
-//   const socket = useContext(SocketContext);
-//   return socket;
-// };
+
 
 const ENDPOINT = 'https://shopsmart.cloud'
+// const ENDPOINT = 'http://localhost:5000'
+
 
 const SocketContext = createContext<any>(null);
 
+// export const useSocket = () => {
+//   const socket = io(ENDPOINT)
+//   return socket;
+// };
+
 export const useSocket = () => {
-  const socket = io(ENDPOINT)
+  const socket = useContext(SocketContext);
   return socket;
 };
 

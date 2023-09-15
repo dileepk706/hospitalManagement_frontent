@@ -104,7 +104,7 @@ type props={
     return () => {
       socket.off("room:join", handleJoinRoom);
     };
-  }, [socket]);
+  }, [startVideoCall]);
 
   const handleAppointMentCancellation=async (id:string)=>{
 
