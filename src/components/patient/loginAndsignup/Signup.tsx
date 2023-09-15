@@ -80,7 +80,7 @@ const Signup: React.FC<SignupProps> = ({ setIsLoginComponent }) => {
             <form onSubmit={handleSubmit}>
 
               {/* loagin with socialmedia */}
-              {/* <LoginWithSocialMediaWrapper/> */}
+              <LoginWithSocialMediaWrapper/>
 
               {/* Separator between social media sign in and email/password sign in */}
               <div className="relative mb-3" data-te-input-wrapper-init>

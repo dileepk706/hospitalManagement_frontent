@@ -92,7 +92,7 @@ const Login: React.FC<LoginProps> = ({ setIsLoginComponent }) => {
           <div className="mb-12 md:mb-0 md:w-8/12 md:px-[70px] lg:w-5/12 xl:w-5/12">
             <form onSubmit={handleSubmit}>
               {/* login with socialmedia */}
-              {/* <LoginWithSocialMediaWrapper /> */}
+              <LoginWithSocialMediaWrapper />
 
               <div className="relative mb-6" data-te-input-wrapper-init>
                 <label className="block   text-sm font-medium text-gray-900 dark:text-white">Email address</label>
