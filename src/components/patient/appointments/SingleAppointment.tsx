@@ -19,7 +19,7 @@ type props={
   const  SingleAppointment:React.FC<props>=({singleAppointment,setIsSingleAppointmentView,setSingleAppointment}) =>{
     const socket:any = useSocket();
     const navigate=useNavigate()
-    const [countdown, setCountdown] = useState('');
+    // const [countdown, setCountdown] = useState('');
     const [showVedioBtn, setShowVedioBtn] = useState(false);
     const [startVideoCall,setStartVideoCall]=useState(false)
     const [cancellationModalOpen,setcancellationModalOpen]=useState(false)
@@ -31,55 +31,55 @@ type props={
     
     const user=useAppSelector(state=>state.user)
 
-     const updateCountdown = () => {
-        const targetDate = appointment?.scheduledAt.slot_date;
-        const targetTime =appointment?.scheduledAt.slot_time;
-        const targetDateTime = moment(`${targetDate} ${targetTime}`, 'YYYY-MM-DD h:mm A');
-        const currentDateTime = moment();
-        const duration = moment.duration(targetDateTime.diff(currentDateTime));
+  //    const updateCountdown = () => {
+  //       const targetDate = appointment?.scheduledAt.slot_date;
+  //       const targetTime =appointment?.scheduledAt.slot_time;
+  //       const targetDateTime = moment(`${targetDate} ${targetTime}`, 'YYYY-MM-DD h:mm A');
+  //       const currentDateTime = moment();
+  //       const duration = moment.duration(targetDateTime.diff(currentDateTime));
 
-        const days = Math.floor(duration.asDays());
-        const hours = Math.floor(duration.asHours()) % 24;
-        const minutes = duration.minutes();
-        const seconds = duration.seconds();
-        if(minutes<5 && hours===0 && days===0){
-          setShowVedioBtn(true)
-        }
-        if (duration <= 0) {
-          setCountdown('Countdown expired');
-          setShowVedioBtn(false)
+  //       const days = Math.floor(duration.asDays());
+  //       const hours = Math.floor(duration.asHours()) % 24;
+  //       const minutes = duration.minutes();
+  //       const seconds = duration.seconds();
+  //       if(minutes<5 && hours===0 && days===0){
+  //         setShowVedioBtn(true)
+  //       }
+  //       if (duration <= 0) {
+  //         setCountdown('Countdown expired');
+  //         setShowVedioBtn(false)
 
-          // if (singleAppointment?.status !== 'notConsulted') {
-          //    editAppointmentStatus(singleAppointment?._id?singleAppointment?._id:'' ).then(res => {
-          //     setSingleAppointment(res.data)
-          //   }).catch((err:any )=> {
-          //     console.log(err);
-          //     checkUserAuth(err)
+  //         // if (singleAppointment?.status !== 'notConsulted') {
+  //         //    editAppointmentStatus(singleAppointment?._id?singleAppointment?._id:'' ).then(res => {
+  //         //     setSingleAppointment(res.data)
+  //         //   }).catch((err:any )=> {
+  //         //     console.log(err);
+  //         //     checkUserAuth(err)
 
-          //   })
-          // }
+  //         //   })
+  //         // }
           
-        } else {
-          setCountdown(`${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`);
-        }
-  };
+  //       } else {
+  //         setCountdown(`${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`);
+  //       }
+  // };
 
   
   
-  useEffect(() => {
-    // Initial call to update the countdown
-    updateCountdown();
+  // useEffect(() => {
+  //   // Initial call to update the countdown
+  //   updateCountdown();
 
-    // Update the countdown every second
-    let countdownInterval :any
+  //   // Update the countdown every second
+  //   let countdownInterval :any
     
-    if(appointment?.status==='notConsulted' && appointment.isConsulted===false  ){
-      countdownInterval = setInterval(updateCountdown, 1000);
-    }
-    return () => {
-      clearInterval(countdownInterval);
-    };
-  }, []);
+  //   if(appointment?.status==='notConsulted' && appointment.isConsulted===false  ){
+  //     countdownInterval = setInterval(updateCountdown, 1000);
+  //   }
+  //   return () => {
+  //     clearInterval(countdownInterval);
+  //   };
+  // }, []);
 
 
   const handleVedioConsulting = useCallback(() => {
@@ -160,10 +160,10 @@ type props={
         </div>
   
               <hr className='my-2 border-gray-300' />
-              <div>
+              {/* <div>
                     <p className='text-gray-500 text-xs'>Time remaining:</p>
                     <h3 className='txt-them text-sm '>{countdown}</h3>
-              </div>
+              </div> */}
           </div>
   
           <div className='col-span-1 flex flex-col  gap-1 '>
