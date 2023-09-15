@@ -81,7 +81,7 @@ function AppointmentListWrapper() {
               <div className='w-full items-center justify-center'>
 
 
-                <Pagination/>
+                {/* <Pagination/> */}
               </div>
             </div>
           ) : (

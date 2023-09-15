@@ -5,9 +5,11 @@ import { checkAdminAuth } from '../../../utils/chekAuth'
 import DropDown from '../../dropdown/Dropdown'
 import SearchInput from '../../searchBar/SearchInput'
 import DoctorTable from './DoctorTable'
+import Pagination from '../../pagination/Pagination'
 
 function DoctorListWrapper() {
     const [doctors, setDoctor] = useState<DoctorType[] | null>(null)
+    const [nonPagnatnDoctrs, setNonPagnatnDoctrs] = useState<DoctorType[] | null>(null)
     const [searchInpt, setearchinpt] = useState('')
     const [name, setName] = useState('')
     const [department, setDepartment] = useState('')
@@ -17,6 +19,9 @@ function DoctorListWrapper() {
     const [sort, setSort] = useState('')
     const [singlePatient, setSinglePatient] = useState<UserType | undefined>(undefined)
     const [singlePatientView, setSinglePatientView] = useState(false)
+    const [currentPage,setCurrentPage]=useState<number>(1)
+    const [totalPage,setTotalPage]=useState<number>(0)
+    const [limit,setLimit]=useState(5)
 
     const sortOptions = [
         {
@@ -46,6 +51,8 @@ function DoctorListWrapper() {
             isSelected: false
         }
     ]
+
+
 
     const price = [
         {
@@ -98,7 +105,15 @@ function DoctorListWrapper() {
             setSex(sort)
             const doc: DoctorType[] = await getAllDoctor(name, department, sex, gte, lte, sort)
             console.log({ patients: doc })
-            setDoctor(doc)
+            setNonPagnatnDoctrs(doc)
+            // console.log({ patients: doctrs })
+            const pages=Math.floor(doc.length/limit)
+            const indexOfLastItem = currentPage * limit;
+            const indexOfFirstItem = indexOfLastItem - limit;
+            const currentItems = doc.slice(indexOfFirstItem, indexOfLastItem);
+            console.log({pages})
+            setTotalPage(pages)
+            setDoctor(currentItems)
         } catch (error: any) {
             checkAdminAuth(error)
             // setApiError(error?.response?.data?.message)
@@ -134,8 +149,16 @@ function DoctorListWrapper() {
             }
             setGte(sort)
             const doc: DoctorType[] = await getAllDoctor(name, department, sex, gte, lte, sort)
-            console.log({ patients: doc })
-            setDoctor(doc)
+            setNonPagnatnDoctrs(doc)
+            // console.log({ patients: doctrs })
+            const pages=Math.floor(doc.length/limit)
+            const indexOfLastItem = currentPage * limit;
+            const indexOfFirstItem = indexOfLastItem - limit;
+            const currentItems = doc.slice(indexOfFirstItem, indexOfLastItem);
+            console.log({pages})
+            setTotalPage(pages)
+            setDoctor(currentItems)
+            // setDoctor(doc)
         } catch (error: any) {
             checkAdminAuth(error)
             // setApiError(error?.response?.data?.message)
@@ -149,18 +172,39 @@ function DoctorListWrapper() {
             name = name ? name : ''
             setName(name)
             const doctrs: DoctorType[] = await getAllDoctor(name, department, sex, gte, lte, sort)
-            console.log({ patients: doctrs })
-            setDoctor(doctrs)
+            setNonPagnatnDoctrs(doctrs)
+            // console.log({ patients: doctrs })
+            const pages=Math.floor(doctrs.length/limit)
+            const indexOfLastItem = currentPage * limit;
+            const indexOfFirstItem = indexOfLastItem - limit;
+            const currentItems = doctrs.slice(indexOfFirstItem, indexOfLastItem);
+            console.log({pages})
+            setTotalPage(pages)
+            setDoctor(currentItems)
         } catch (error: any) {
             checkAdminAuth(error)
             // setApiError(error?.response?.data?.message)
             console.log('error : ', error?.response?.status);
         }
     }
+    const handlePagination=()=>{
+        const doctrs=nonPagnatnDoctrs
+        if(doctrs){
+        const pages=Math.floor(doctrs.length/limit)
+            const indexOfLastItem = currentPage * limit;
+            const indexOfFirstItem = indexOfLastItem - limit;
+            const currentItems = doctrs.slice(indexOfFirstItem, indexOfLastItem);
+            console.log({pages})
+            setTotalPage(pages)
+            setDoctor(currentItems)
+        }
+    }
     useEffect(() => {
-
         handleGetPateints()
     }, [])
+    useEffect(() => {
+        handlePagination()
+    }, [currentPage])
     return (
         <div className='flex flex-col gap-5'>
             <div className="w-full z-10 p-2  sticky top-0 rounded-md flex justify-start gap-5" >
@@ -184,6 +228,8 @@ function DoctorListWrapper() {
             </div>
 
             <DoctorTable doctors={doctors} setDoctor={setDoctor} />
+
+            <Pagination currentPage={currentPage} totalPage={totalPage} setCurrentPage={setCurrentPage}  />
         </div>
 
 

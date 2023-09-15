@@ -135,13 +135,7 @@ type props={
             <h3 className='text-sm font-semibold'>At {appointment?.scheduledAt.slot_time}</h3>
           </div>
           <div className='mt-2'>
-            <button 
-            onClick={()=>{
-              setcancellationModalOpen(true)
-            }}
-            className='text-blue-500 hover:underline text-xs'>
-              Cancell Appointment
-            </button>
+           
           </div>
         </div>
     
@@ -205,7 +199,7 @@ type props={
               <div className='mt-4'>
               <p className='txt-them text-xs'>Your consultaiton will be activate before the 5 min of your time</p>
               </div>
-              <div className='mt-4'>
+              <div className='mt-4 flex items-center justify-start gap-4 '>
               {/* <Button size='small' variant="contained"
                 onClick={()=>{
                   handleVedioConsulting()
@@ -225,6 +219,14 @@ type props={
                 </Button>
               )
             }
+            <Button size='small' variant="contained" color='error'
+            onClick={()=>{
+              setcancellationModalOpen(true)
+            }}
+            >
+            Cancell Appointment
+            </Button>
+             
                   
               </div>
           </div>

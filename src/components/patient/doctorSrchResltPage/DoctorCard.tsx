@@ -24,6 +24,9 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ DoctorName, department, image, 
 
     const reviewCount = review?.length;
     return (
+        <Link to={`/make-appointment/${id}`}>
+
+        
         <div v-for="card in cards" className="flex flex-col md:flex-row overflow-hidden bg-white rounded-lg shadow-[0_5px_15px_rgba(8,_112,_184,_0.7)]  mt-4 w-100 ">
             <div className="h-64 w-auto md:w-1/3 p-3">
                 <img
@@ -91,7 +94,7 @@ const DoctorCard: React.FC<DoctorCardProps> = ({ DoctorName, department, image, 
             </div>
 
         </div>
-
+        </Link>
     )
 }
 

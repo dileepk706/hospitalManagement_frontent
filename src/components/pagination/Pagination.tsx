@@ -4,17 +4,18 @@ import React from 'react'
 type PaginationProps = {
     changePage?: any
     currentPage?: any
-    totalPage?:number
+    totalPage:number
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>
 }
 
-const Pagination: React.FC<PaginationProps> = ({ changePage, currentPage }) => {
+const Pagination: React.FC<PaginationProps> = ({ changePage, currentPage ,totalPage,setCurrentPage}) => {
 
     const pages = []
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i <= totalPage; i++) {
         pages.push(
             (
                 <li>
-                    <a href="#" className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
+                    <p onClick={()=>setCurrentPage(i)} className={`flex items-center justify-center px-3 h-8 leading-tight text-gray-500  ${i==currentPage?'bg-gray-600':'bg-white'} border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white`}>{i}</p>
                 </li>
             )
         )
